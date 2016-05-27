@@ -11,9 +11,6 @@
 .pace-inactive {
     display: none;
 }
-body {
-    background: #f9f9f5;
-}
 .theme-black {
     background-color: #444;
     color: #d6dbdf;
@@ -456,7 +453,7 @@ ul.dropdown-menu #search-file-textbox {
     margin-right: 10px;
     width: 300px;
 }
-ul.dropdown-menu.theme-black li > a {
+/*ul.dropdown-menu.theme-black li > a {
     color: #bbb;
 }
 ul.dropdown-menu.theme-black li > a:hover {
@@ -467,7 +464,7 @@ ul.dropdown-menu.theme-white li > a {
 }
 ul.dropdown-menu.theme-white li > a:hover {
     color: #fff;
-}
+}*/
 ul.dropdown-menu li i[class*="icon"] {
     margin-right: 10px;
     vertical-align: baseline;
@@ -602,7 +599,7 @@ ul.dropdown-menu li i[class*="icon"] {
     font-family: Arial !important;
     font-size: 15px !important;
 }
-.theme-white.sequence-diagram [fill="#ffffff"], .theme-white.flow-diagram [fill="#ffffff"] {
+/*.theme-white.sequence-diagram [fill="#ffffff"], .theme-white.flow-diagram [fill="#ffffff"] {
     fill: #f9f9f5;
 }
 .theme-white.sequence-diagram [stroke="#000000"], .theme-white.flow-diagram [stroke="#000000"] {
@@ -631,7 +628,7 @@ ul.dropdown-menu li i[class*="icon"] {
 }
 .theme-black .MathJax_SVG [fill="black"] {
     fill: #d6dbdf;
-}
+}*/
 .ace_search.right {
     border: 1px solid #cbcbcb !important;
 }
@@ -908,12 +905,12 @@ button:focus {
     padding-bottom: 2px;
     padding-top: 2px;
 }
-.theme-white .highlight-blue {
+/*.theme-white .highlight-blue {
     background-color: rgba(168, 209, 255, 0.8);
 }
 .theme-black .highlight-blue {
     background-color: rgba(168, 209, 255, 0.5);
-}
+}*/
 .side-remark-hidden {
     display: none;
     position: absolute !important;
@@ -971,12 +968,12 @@ button:focus {
     border-bottom: 1px solid;
     margin-bottom: 20px;
 }
-.theme-white .remark-item {
+/*.theme-white .remark-item {
     border-color: rgba(0, 0, 0, 0.1);
 }
 .theme-black .remark-item {
     border-color: rgba(0, 0, 0, 0.2);
-}
+}*/
 .remark-item:hover {
     cursor: pointer;
 }
@@ -1021,12 +1018,12 @@ button:focus {
     border-width: 0 1px 1px;
     padding: 3px 10px 3px 3px;
 }
-.theme-white .remark-options li {
+/*.theme-white .remark-options li {
     border-color: rgba(0, 0, 0, 0.1);
 }
 .theme-black .remark-options li {
     border-color: rgba(0, 0, 0, 0.2);
-}
+}*/
 .remark-options li:hover {
     background-color: #08c;
     color: #fff;

@@ -1,5 +1,48 @@
 /* Pretty printing styles. Used with prettify.js. */
 /* SPAN elements with the classes below are added by prettyprint. */
+
+html,
+body{
+    background-color: #f9f9f5;
+    color: #2c3e50;
+}
+
+ul.dropdown-menu li > a {
+    color: #333;
+}
+ul.dropdown-menu li > a:hover {
+    color: #fff;
+}
+
+.sequence-diagram [fill="#ffffff"], .flow-diagram [fill="#ffffff"] {
+    fill: #f9f9f5;
+}
+.sequence-diagram [stroke="#000000"], .flow-diagram [stroke="#000000"] {
+    stroke: #2c3e50;
+}
+.sequence-diagram [fill="#000"], .flow-diagram [fill="#000"], .sequence-diagram [fill="#000000"], .flow-diagram [fill="#000000"], .sequence-diagram [fill="black"], .flow-diagram [fill="black"] {
+    fill: #2c3e50;
+}
+
+.MathJax_SVG [stroke="black"] {
+    stroke: #2c3e50;
+}
+.MathJax_SVG [fill="black"] {
+    fill: #2c3e50;
+}
+
+.highlight-blue {
+    background-color: rgba(168, 209, 255, 0.8);
+}
+
+.remark-item {
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.remark-options li {
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
 .pln { color: #000 }  /* plain text */
 
 @media screen {
