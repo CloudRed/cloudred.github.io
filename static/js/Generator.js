@@ -72,8 +72,9 @@ function showPage( path ){
         url : path,
         dataType : "text",
         success : function( data ){
+            alert(data)
             $('#page').css({'display':'block'});
-            g('#page').html( data );
+            $('#page').html( data );
         },
         error : function( jqXHR ){
             alert( jqXHR.statues );
