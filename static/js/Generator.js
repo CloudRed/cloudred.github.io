@@ -1,0 +1,74 @@
+;
+
+var PAGE_SHOW = 9; // 每页显示的条目数
+
+;
+var data = page_data;
+var tags = [];
+var item_count = 0;
+var template = undefined;
+
+function index_generator(){
+    template = g('#wrap').innerHTML;
+
+    var html = [];
+    var show_length = PAGE_SHOW;
+
+    if( data.length < PAGE_SHOW ){
+        show_length = data.length;
+    }
+    if( data.length - item_count < PAGE_SHOW ){
+        show_length = data.length - item_count;
+    }
+
+    for( i = 0; i < show_length; i++ ){
+        var _html = template.replace( '{{title}}', data[i].title )
+                                .replace( '{{path}}', data[i].path )
+                                .replace( '{{date}}', data[i].date );
+        html.push( _html );
+        for( s in data[i].tags){
+            var _tag = data[i].tags[s];
+            tags.push( _tag );
+        }
+    }
+
+    item_count = i;
+    g('#wrap').innerHTML = html.join(' ');
+};
+
+addLoadEvent( index_generator );
+
+function addPage(){
+    var html = [];
+    var show_length = PAGE_SHOW;
+
+    if( data.length - item_count < PAGE_SHOW ){
+        show_length = data.length - item_count;
+    }
+
+    for( i = item_count; i < show_length + item_count; i++ ){
+        var _html = template.replace( '{{title}}', data[i].title )
+                                .replace( '{{path}}', data[i].path )
+                                .replace( '{{date}}', data[i].date );
+        html.push( _html );
+        for( s in data[i].tags){
+            var _tag = data[i].tags[s];
+            tags.push( _tag );
+        }
+    }
+
+    item_count = i;
+    g('#wrap').innerHTML += html.join(' ');
+
+    if( data.length == item_count ){
+        g('#more').innerHTML = 'finished !';
+    }    
+}
+
+
+
+function sortByTags(){
+    for( i in tags ){
+
+    }
+}

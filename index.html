@@ -1,15 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href= "static/css/base.lib.min.css" rel="stylesheet" media="screen">
+    <meta charset="utf-8" />
+
+    <!-- <link href= "static/css/base.lib.min.css" rel="stylesheet" media="screen"> -->
     <link href="static/css/layout.min.css" rel="stylesheet" media="screen">
     <!-- 白色 -->
     <!-- <link id="prettify-style" href="static/css/prettify-cmd.css" type="text/css" rel="stylesheet"> -->
     <!-- 黑色 -->
     <link id="prettify-style" href="static/css/desert-cmd.css" type="text/css" rel="stylesheet">
+
+    <link href="static/css/base.css" type="text/css" rel="stylesheet" />
+
+    <script type="text/javascript" src="static/js/GeneralTools.js"></script>
+    <script type="text/javascript" src="pages/data.js"></script>
+    <script type="text/javascript" src="static/js/Generator.js"></script>
 </head>
 
 <body>
-    <h1> <a href="https://cloudred.github.io">我的首页啊</a></h1>
+    <div class="base-container">
+        <div class="container">
+            <h1> <a href="https://cloudred.github.io">我的首页啊</a></h1>
+
+            <div id="wrap">
+                <div class="">
+                    <h2><a href="{{path}}">{{title}}</a> {{date}}</h2>
+                </div>
+            </div>
+            <div class="footer">
+                <a id="more" href="javascript:;" onclick="addPage();">more</a>
+                <hr />
+                <a href="#">&copy; CloudRed</a>
+            </div>            
+        </div>
+    </div>
 </body>
 </html>
