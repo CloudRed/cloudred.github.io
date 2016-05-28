@@ -9,7 +9,7 @@ var page_data = [
     {
         title : '我的神奇的文章2',
         date : '2016-5-27',
-        path : 'pages/2016/demo/index.html',
+        path : 'pages/2016/demo/',
         tags : ['SQL Injection']
     },
     {

@@ -1,6 +1,6 @@
 ;
 
-var PAGE_SHOW = 9; // 每页显示的条目数
+var PAGE_SHOW = 8; // 每页显示的条目数
 
 ;
 var data = page_data;
@@ -66,6 +66,20 @@ function addPage(){
 }
 
 
+function showPage( path ){
+    $.ajax({
+        type : 'GET',
+        url : path,
+        dataType : "text",
+        success : function( data ){
+            $('#page').css({'display':'block'});
+            g('#page').html( data );
+        },
+        error : function( jqXHR ){
+            alert( jqXHR.statues );
+        }
+    });
+}
 
 function sortByTags(){
     for( i in tags ){
