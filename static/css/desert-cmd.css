@@ -1,7 +1,7 @@
 
 html,
 body{
-    background-color: #444;
+    background-color: #333;
     color: #d6dbdf;
 }
 
@@ -13,7 +13,7 @@ ul.dropdown-menu li > a:hover {
 }
 
 .sequence-diagram [fill="#ffffff"], .flow-diagram [fill="#ffffff"] {
-    fill: #444;
+    fill: #333;
 }
 .sequence-diagram [stroke="#000000"], .flow-diagram [stroke="#000000"] {
     stroke: #d6dbdf;
@@ -92,8 +92,8 @@ ol.linenums > li {
     padding-left: 15px;
 }
 pre.prettyprint {
-    background-color: #333;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset, 45px 0 0 rgba(0, 0, 0, 0.25) inset, 0 1px 0 #333;
+    background-color: #222;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset, 45px 0 0 rgba(0, 0, 0, 0.25) inset, 0 1px 0 #222;
     display: block;
     padding: 9.5px;
 }
