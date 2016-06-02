@@ -25,19 +25,14 @@
 
             <div id="wrap">
                 <div class="">
-                    <h2><a href="javascript:;" onclick="showPage('{{path}}');">{{title}}</a> {{date}}</h2>
+                    <h2><a href="javascript:return false;" onclick="showPage('{{path}}');">{{title}}</a> {{date}}</h2>
                 </div>
             </div>
 
-            <div id="page">
-                <div class="page-close">
-                    <a href="javascript:;"> x </a>
-                </div>
-                <div id="page-context"></div>
-            </div>
+            <div id="page"></div>
 
             <div class="footer">
-                <a id="more" href="javascript:;" onclick="addPage();">more</a>
+                <a id="more" href="javascript:return false;" onclick="addPage();">more</a>
                 <hr />
                 <a href="#">&copy; CloudRed</a>
             </div>            
