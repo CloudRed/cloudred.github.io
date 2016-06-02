@@ -72,11 +72,11 @@ function showPage( path ){
         url : path,
         dataType : "text",
         success : function( data ){
+            alert(data)
             $('#page').css({'display':'block'});
-            $('#page-context').html( data );
+            $('#page').html( data );
         },
         error : function( jqXHR ){
-            console.log( 123 );
             alert( jqXHR.statues );
         }
     });
@@ -87,11 +87,3 @@ function sortByTags(){
 
     }
 }
-;
-
-$(function(){
-    $('.page-close a').click(function(){
-        $('#page').css({'display':'none'});
-    });
-
-});
