@@ -28,7 +28,7 @@
 
             <div id="wrap">
                 <div class="">
-                    <h2><a href="javascript:;" onclick="showPage('{{path}}');">{{title}}</a> {{date}}</h2>
+                    <h2><a href="javascript:;" onclick="showPage('{{path}}');">{{title}}</a>&nbsp;&nbsp;{{date}}</h2>
                 </div>
             </div>
 
@@ -55,6 +55,8 @@
             $(window).load(function(){             
                 $("body").mCustomScrollbar({
                     autoHideScrollbar : true
+                });
+                $("#page").mCustomScrollbar({
                 });
             });
         })(jQuery);
