@@ -144,7 +144,7 @@ a {
 }
 a:hover {
     color: #005580;
-    text-decoration: underline;
+    /*text-decoration: underline;*/
 }
 .img-rounded {
     border-radius: 6px;

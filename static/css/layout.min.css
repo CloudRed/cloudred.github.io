@@ -216,7 +216,7 @@ h5, h6 {
 #toc-list a:hover {
     background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
     color: #005580;
-    text-decoration: underline;
+    /*text-decoration: underline;*/
 }
 #toc-list a {
     color: #08c;
