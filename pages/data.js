@@ -3,7 +3,7 @@ var page_data = [
     {
         title : '我的神奇的文章1',
         date : '2016-5-27',
-        path : 'pages/2016/demo/',
+        path : 'pages/2016/demo1/',
         tags : ['DataBase', 'SQL Injection']
     },
     {
