@@ -22,9 +22,9 @@ if( data.length - item_count < PAGE_SHOW ){
 }
 
 for( i = 0; i < show_length; i++ ){
-    var _html = template.replace( '{{title}}', data[i].title )
-                            .replace( '{{path}}', data[i].path )
-                            .replace( '{{date}}', data[i].date );
+    var _html = template.replace( /{{title}}/g, data[i].title )
+                            .replace( /{{path}}/g, data[i].path )
+                            .replace( /{{date}}/g, data[i].date );
     html.push( _html );
     for( s in data[i].tags){
         var _tag = data[i].tags[s];
