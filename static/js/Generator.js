@@ -8,7 +8,7 @@ var tags = [];
 var item_count = 0;
 var template = undefined;
 
-function index_generator(){
+(function(){
     template = g('#wrap').innerHTML;
 
     var html = [];
@@ -34,9 +34,7 @@ function index_generator(){
 
     item_count = i;
     g('#wrap').innerHTML = html.join(' ');
-};
-
-addLoadEvent( index_generator );
+})();
 
 function addPage(){
     var html = [];

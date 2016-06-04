@@ -12,14 +12,6 @@
     <link href="static/css/base.css" type="text/css" rel="stylesheet" />
 
     <link rel="stylesheet" href="static/plugs/mCustomScrollbar/jquery.mCustomScrollbar.min.css">
-
-    <!-- Google CDN jQuery with fallback to local -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="static/js/jquery-1.11.0.min.js"><\/script>')</script>
-
-    <script type="text/javascript" src="static/js/GeneralTools.js"></script>
-    <script type="text/javascript" src="pages/data.js"></script>
-    <script type="text/javascript" src="static/js/Generator.js"></script>
 </head>
 
 <body>
@@ -71,7 +63,9 @@ s.setAttribute('data-timestamp', +new Date());
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 
 
-    
+    <!-- Google CDN jQuery with fallback to local -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="static/js/jquery-1.11.0.min.js"><\/script>')</script>
     <!-- custom scrollbar plugin -->
     <script src="static/plugs/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
     
@@ -86,6 +80,11 @@ s.setAttribute('data-timestamp', +new Date());
             });
         })(jQuery);
     </script>
+
+    <script type="text/javascript" src="static/js/GeneralTools.js"></script>
+    <script type="text/javascript" src="pages/data.js"></script>
+    <script type="text/javascript" src="static/js/Generator.js"></script>
+
 <script id="dsq-count-scr" src="//cloudred.disqus.com/count.js" async></script>
 </body>
 </html>
