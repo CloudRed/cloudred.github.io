@@ -84,7 +84,8 @@
           reload: true,
           config: function () {  
             this.page.identifier = "page1";  
-            this.page.url = "https://cloudred.github.io/pages/2016/demo2/#!page1";
+            this.page.title = document.getElementsByTags('title')[0].innerHTML;
+            this.page.url = "https://cloudred.github.io/pages/2016/demo/#!page1";
           }
         });
     </script>
