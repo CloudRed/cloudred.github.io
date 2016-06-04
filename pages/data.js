@@ -25,4 +25,3 @@ var page_data = [
         tags : ['Math']
     }
 ];
-];
