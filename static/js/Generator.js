@@ -8,33 +8,34 @@ var tags = [];
 var item_count = 0;
 var template = undefined;
 
-(function(){
-    template = g('#wrap').innerHTML;
 
-    var html = [];
-    var show_length = PAGE_SHOW;
+template = g('#wrap').innerHTML;
 
-    if( data.length < PAGE_SHOW ){
-        show_length = data.length;
+var html = [];
+var show_length = PAGE_SHOW;
+
+if( data.length < PAGE_SHOW ){
+    show_length = data.length;
+}
+if( data.length - item_count < PAGE_SHOW ){
+    show_length = data.length - item_count;
+}
+
+for( i = 0; i < show_length; i++ ){
+    var _html = template.replace( '{{title}}', data[i].title )
+                            .replace( '{{path}}', data[i].path )
+                            .replace( '{{date}}', data[i].date );
+    html.push( _html );
+    for( s in data[i].tags){
+        var _tag = data[i].tags[s];
+        tags.push( _tag );
     }
-    if( data.length - item_count < PAGE_SHOW ){
-        show_length = data.length - item_count;
-    }
+}
 
-    for( i = 0; i < show_length; i++ ){
-        var _html = template.replace( '{{title}}', data[i].title )
-                                .replace( '{{path}}', data[i].path )
-                                .replace( '{{date}}', data[i].date );
-        html.push( _html );
-        for( s in data[i].tags){
-            var _tag = data[i].tags[s];
-            tags.push( _tag );
-        }
-    }
+item_count = i;
+g('#wrap').innerHTML = html.join(' ');
 
-    item_count = i;
-    g('#wrap').innerHTML = html.join(' ');
-})();
+    
 
 function addPage(){
     var html = [];
