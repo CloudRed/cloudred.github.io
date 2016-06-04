@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>CloudRed | Blog</title>
 
-    <link href= "static/css/base.lib.min.css" rel="stylesheet" media="screen">
+    <link href="static/css/base.lib.min.css" rel="stylesheet" media="screen">
     <link href="static/css/layout.min.css" rel="stylesheet" media="screen">
 
     <link id="prettify-style" href="static/css/desert-cmd.css" type="text/css" rel="stylesheet">
@@ -29,13 +29,9 @@
             <div id="wrap">
                 <div class="">
                     <h2><a href="javascript:;" onclick="showPage('{{path}}');return false;">{{title}}</a>&nbsp;&nbsp;{{date}}</h2>
-                    <p><a href="{{path}}#disqus_thread" onclick="showPage('{{path}}');return false;"></a></p>
+                    <p><a href="{{path}}#disqus_thread"></a></p>
                 </div>
-                <p><a href="/pages/2016/demo1/#disqus_thread" onclick="showPage('{{path}}');return false;"></a></p>
-                <p><a href="/pages/2016/demo2/#disqus_thread" onclick="showPage('{{path}}');return false;"></a></p>
             </div>
-            <p><a href="/pages/2016/demo1/#disqus_thread" onclick="showPage('{{path}}');return false;"></a></p>
-                <p><a href="/pages/2016/demo2/#disqus_thread" onclick="showPage('{{path}}');return false;"></a></p>
 
             <div id="page">
                 <div class="page-close">
@@ -70,19 +66,18 @@
     <script type="text/javascript" src="static/js/Generator.js"></script>
 
 
-    <!--<script src="static/plugs/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>-->
-    <!--<script>-->
-    <!--    (function($){-->
-    <!--        $(window).load(function(){             -->
-    <!--            $("body").mCustomScrollbar({-->
-    <!--                autoHideScrollbar : true-->
-    <!--            });-->
-    <!--            $("#page").mCustomScrollbar({-->
-    <!--            });-->
-    <!--        });-->
-    <!--    })(jQuery);-->
-    <!--</script>-->
-
+    <script src="static/plugs/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script>
+        (function($){
+           $(window).load(function(){            
+                $("body").mCustomScrollbar({
+                    autoHideScrollbar : true
+                });
+                $("#page").mCustomScrollbar({
+                });
+            });
+        })(jQuery);
+    </script>
     
 
     <script id="dsq-count-scr" src="//cloudred.disqus.com/count.js"></script>
