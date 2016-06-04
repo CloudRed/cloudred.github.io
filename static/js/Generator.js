@@ -35,7 +35,7 @@ for( i = 0; i < show_length; i++ ){
 item_count = i;
 g('#wrap').innerHTML = html.join(' ');
 
-    
+
 
 function addPage(){
     var html = [];
@@ -46,9 +46,9 @@ function addPage(){
     }
 
     for( i = item_count; i < show_length + item_count; i++ ){
-        var _html = template.replace( '{{title}}', data[i].title )
-                                .replace( '{{path}}', data[i].path )
-                                .replace( '{{date}}', data[i].date );
+        var _html = template.replace( /{{title}}/g, data[i].title )
+                                .replace( /{{path}}/g, data[i].path )
+                                .replace( /{{date}}/g, data[i].date );
         html.push( _html );
         for( s in data[i].tags){
             var _tag = data[i].tags[s];
