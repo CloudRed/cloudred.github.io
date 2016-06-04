@@ -21,7 +21,19 @@ var page_data = [
     {
         title : '我的神奇的文章4',
         date : '2016-5-28',
-        path : '/pages/2016/demo/',
+        path : '/pages/2016/demo4/',
+        tags : ['Math']
+    },
+    {
+        title : '我的神奇的文章5',
+        date : '2016-5-28',
+        path : '/pages/2016/demo5/',
+        tags : ['Math']
+    },
+    {
+        title : '我的神奇的文章6',
+        date : '2016-5-28',
+        path : '/pages/2016/demo6/',
         tags : ['Math']
     }
 ];
