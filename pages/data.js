@@ -33,7 +33,7 @@ var page_data = [
     {
         title : '我的神奇的文章6',
         date : '2016-5-28',
-        path : '/pages/2016/demo6/',
+        path : '/pages/2016/demo/',
         tags : ['Math']
     }
 ];
