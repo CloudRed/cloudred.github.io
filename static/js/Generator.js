@@ -63,7 +63,7 @@ function addPage(){
         g('#more').innerHTML = 'finished !';
     }
     addCommentCount();
-}
+};
 
 
 function showPage( path ){
@@ -107,7 +107,7 @@ function addCommentCount(){
     typeof DISQUSWIDGETS==="undefined" && ( DISQUSWIDGETS = function(){
         var f=document,
             a=f.getElementById("dsq-count-scr"),
-            a=a & &a.src.match(/(https?:)?\/\/(?:www\.)?([\w_\-]+)\.((?:dev\.)?disqus\.(?:com|org)(?::\d+)?)/i),
+            a=a&&a.src.match(/(https?:)?\/\/(?:www\.)?([\w_\-]+)\.((?:dev\.)?disqus\.(?:com|org)(?::\d+)?)/i),
             e={},
             s=f.head||f.body,
             j={},
