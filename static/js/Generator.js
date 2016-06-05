@@ -62,6 +62,7 @@ function addPage(){
     if( data.length == item_count ){
         g('#more').innerHTML = 'finished !';
     }
+    g('body').innerHTML += '<script id="dsq-count-scr" src="//cloudred.disqus.com/count.js" async></script>';
     DISQUSWIDGETS.getCount();
 };
 
