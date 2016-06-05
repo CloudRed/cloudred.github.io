@@ -105,6 +105,7 @@ function addCommentCount(){
     var DISQUSWIDGETS,disqus_domain,disqus_shortname;
 
     typeof DISQUSWIDGETS==="undefined" && ( DISQUSWIDGETS = function(){
+        alert(123);
         var f=document,
             a=f.getElementById("dsq-count-scr"),
             a=a&&a.src.match(/(https?:)?\/\/(?:www\.)?([\w_\-]+)\.((?:dev\.)?disqus\.(?:com|org)(?::\d+)?)/i),
