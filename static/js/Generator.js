@@ -62,7 +62,7 @@ function addPage(){
     if( data.length == item_count ){
         g('#more').innerHTML = 'finished !';
     }
-    addCommentCount();
+    DISQUSWIDGETS.getCount();
 };
 
 
@@ -164,5 +164,4 @@ function addCommentCount(){
         };
         return e
     }());
-    DISQUSWIDGETS.getCount();
 }
