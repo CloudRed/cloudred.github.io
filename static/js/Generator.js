@@ -42,7 +42,7 @@ function addPage(){
     var html = [];
     var show_length = PAGE_SHOW;
     var host_name = HOST_NAME;
-    var comment_count = '//cloudred.disqus..com/count-data.js?';
+    var comment_count = '//cloudred.disqus.com/count-data.js?';
 
     if( data.length - item_count < PAGE_SHOW ){
         show_length = data.length - item_count;
@@ -52,7 +52,7 @@ function addPage(){
         var _html = template.replace( /{{title}}/g, data[i].title )
                                 .replace( /{{path}}/g, data[i].path )
                                 .replace( /{{date}}/g, data[i].date );
-        var c = '2=' + encodeURI(host_name + data[i].path + '#disqus_thread&');
+        var c = '2=' + encodeURI(host_name + data[i].path + '#disqus_thread') + '&';
         comment_count += c;
         html.push( _html );
         for( s in data[i].tags){
