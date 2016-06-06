@@ -8,7 +8,7 @@ var data = page_data;
 var tags = [];
 var item_count = 0;
 var template = undefined;
-var comment_count = '//cloudred.disqus.com/count-data.js?';
+var comment_count = 'http://cloudred.disqus.com/count-data.js?';
 
 var comUrlSet = [];
 
@@ -124,7 +124,8 @@ $(function(){
 
 
 
-    var disqus_domain,disqus_shortname;
+    // var disqus_domain = ''
+    var disqus_shortname = 'cloudred';
 
     var ccc = function(){
         var f=document,
