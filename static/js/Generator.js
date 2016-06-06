@@ -168,6 +168,7 @@ function addCommentCount(){
             
             for(c=d.slice(k,l); c.length; ) 
                 b=f.createElement("script"),b.src=a+c.join("&")+r,s.appendChild(b),k+=10,l+=10,c=d.slice(k,l)
+            alert( 123 );
         };
         e.displayCount=function(b){
             for(var c,a,d,e=b.counts,b=b.text.comments; c=e.shift(); )
