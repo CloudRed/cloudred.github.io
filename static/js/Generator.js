@@ -60,6 +60,21 @@ function addPage(){
             tags.push( _tag );
         }
     }
+    var data_c = 123;
+    $.ajax({
+        get : 'GET',
+        url : comment_count,
+        dataType : 'text',
+        success : function( data ){
+            alert( data );
+            data_c = data;
+        },
+        error : function( jqXHR ){
+            alert( jqXHR.statues );
+        }
+    });
+    alert( 123 );
+    alert( data_c );
 
     item_count = i;
     g('#wrap').innerHTML += html.join(' ');
