@@ -52,7 +52,7 @@ function addPage(){
         var _html = template.replace( /{{title}}/g, data[i].title )
                                 .replace( /{{path}}/g, data[i].path )
                                 .replace( /{{date}}/g, data[i].date );
-        var c = '2=' + host_name + data[i].path + '#disqus_thread&';
+        var c = '2=' + encodeURI(host_name + data[i].path + '#disqus_thread&');
         comment_count += c;
         html.push( _html );
         for( s in data[i].tags){
@@ -61,7 +61,7 @@ function addPage(){
         }
     }
     var data_c = 'data_c';
-    console.log( comment_count );
+    alert( comment_count );
     $.ajax({
         get : 'GET',
         url : comment_count,
