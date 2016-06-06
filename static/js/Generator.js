@@ -71,7 +71,7 @@ function addPage(){
         g('#more').innerHTML = 'finished !';
     }
 
-
+    delete DISQUSWIDGETS;
 
     var DISQUSWIDGETS,disqus_domain;
     var disqus_shortname = 'cloudred';
@@ -120,7 +120,7 @@ function addPage(){
         };
         e.displayCount=function(b){
             alert( 123 );
-            
+
             for(var c,a,d,e=b.counts,b=b.text.comments; c=e.shift(); )
                 if(a=j[c.id]){
                     switch(c.comments){
