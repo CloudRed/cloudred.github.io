@@ -124,7 +124,7 @@ $(function(){
 
 
 
-    // var disqus_domain = ''
+    var disqus_domain;
     var disqus_shortname = 'cloudred';
 
     var ccc = function(){
