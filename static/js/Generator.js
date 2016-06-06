@@ -41,7 +41,8 @@ item_count = i;
 g('#wrap').innerHTML = html.join(' ');
 
 /////////////////////////////////////////////////////////////
-    var DISQUSWIDGETS,disqus_domain,disqus_shortname;
+    var DISQUSWIDGETS,disqus_domain;
+    disqus_shortname = 'cloudred';
 
     var DISQUSWIDGETS = function(){
         var f=document,
@@ -104,6 +105,7 @@ g('#wrap').innerHTML = html.join(' ');
         };
         return e
     }();
+    DISQUSWIDGETS.getCount();
 ////////////////////////////////////////////////////////////
 
 
