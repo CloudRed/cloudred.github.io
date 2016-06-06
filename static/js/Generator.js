@@ -8,6 +8,9 @@ var data = page_data;
 var tags = [];
 var item_count = 0;
 var template = undefined;
+var comment_count = '//cloudred.disqus.com/count-data.js?';
+
+var comUrlSet = [];
 
 
 template = g('#wrap').innerHTML;
@@ -26,6 +29,7 @@ for( i = 0; i < show_length; i++ ){
     var _html = template.replace( /{{title}}/g, data[i].title )
                             .replace( /{{path}}/g, data[i].path )
                             .replace( /{{date}}/g, data[i].date );
+    comUrlSet.push(HOST_NAME + data[i].path + '#disqus_thread');
     html.push( _html );
     for( s in data[i].tags){
         var _tag = data[i].tags[s];
@@ -42,7 +46,6 @@ function addPage(){
     var html = [];
     var show_length = PAGE_SHOW;
     var host_name = HOST_NAME;
-    var comment_count = '//cloudred.disqus.com/count-data.js?';
 
     if( data.length - item_count < PAGE_SHOW ){
         show_length = data.length - item_count;
@@ -52,30 +55,14 @@ function addPage(){
         var _html = template.replace( /{{title}}/g, data[i].title )
                                 .replace( /{{path}}/g, data[i].path )
                                 .replace( /{{date}}/g, data[i].date );
-        var c = '2=' + encodeURI(host_name + data[i].path + '#disqus_thread') + '&';
-        comment_count += c;
+
+        comUrlSet.push(HOST_NAME + data[i].path + '#disqus_thread');
         html.push( _html );
         for( s in data[i].tags){
             var _tag = data[i].tags[s];
             tags.push( _tag );
         }
     }
-    var data_c = 'data_c';
-    alert( comment_count );
-    $.ajax({
-        get : 'GET',
-        url : comment_count,
-        dataType : 'text',
-        success : function( data ){
-            alert( data );
-            data_c = data;
-        },
-        error : function( jqXHR ){
-            alert( jqXHR.statues );
-        }
-    });
-    alert( 123 );
-    alert( data_c );
 
     item_count = i;
     g('#wrap').innerHTML += html.join(' ');
@@ -84,7 +71,7 @@ function addPage(){
         g('#more').innerHTML = 'finished !';
     }
 
-    $.getScript(comment_count);
+    DISQUSWIDGETS.getCount();    
 };
 
 
