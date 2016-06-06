@@ -60,7 +60,8 @@ function addPage(){
             tags.push( _tag );
         }
     }
-    var data_c = 123;
+    var data_c = 'data_c';
+    console.log( comment_count );
     $.ajax({
         get : 'GET',
         url : comment_count,
