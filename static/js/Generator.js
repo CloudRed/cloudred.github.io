@@ -8,7 +8,7 @@ var data = page_data;
 var tags = [];
 var item_count = 0;
 var template = undefined;
-// var comment_count = 'http://cloudred.disqus.com/count-data.js?';
+var comment_count = '//cloudred.disqus.com/count-data.js?';
 
 var comUrlSet = [];
 
@@ -71,63 +71,11 @@ function addPage(){
         g('#more').innerHTML = 'finished !';
     }
 
-    ccc.getCount();    
-};
 
-
-function showPage( path ){
-    $.ajax({
-        type : 'GET',
-        url : path,
-        dataType : "text",
-        success : function( data ){
-            $('#page').css({'display':'block'});
-            $('#page-context').html( data );
-        },
-        error : function( jqXHR ){
-            alert( jqXHR.statues );
-        }
-    });
-}
-
-function manualGetCount( url ){
-    $.ajax({
-        type : 'GET',
-        url : url,
-        dataType : "text",
-        success : function( data ){
-            alert( data );
-            return data;
-        },
-        error : function( jqXHR ){
-            alert( jqXHR.statues );
-        }
-    });
-}
-
-function sortByTags(){
-    for( i in tags ){
-
-    }
-}
-;
-
-$(function(){
-    $('.page-close a').click(function(){
-        $('#page').css({'display':'none'});
-    });
-
-});
-
-
-
-
-
-
-    var disqus_domain;
+    var DISQUSWIDGETS,disqus_domain;
     var disqus_shortname = 'cloudred';
 
-    var ccc = function(){
+    var DISQUSWIDGETS = function(){
         var f=document,
             a=f.getElementById("dsq-count-scr"),
             a=a&&a.src.match(/(https?:)?\/\/(?:www\.)?([\w_\-]+)\.((?:dev\.)?disqus\.(?:com|org)(?::\d+)?)/i),
@@ -187,3 +135,50 @@ $(function(){
         };
         return e
     }();
+    DISQUSWIDGETS.getCount();    
+};
+
+
+function showPage( path ){
+    $.ajax({
+        type : 'GET',
+        url : path,
+        dataType : "text",
+        success : function( data ){
+            $('#page').css({'display':'block'});
+            $('#page-context').html( data );
+        },
+        error : function( jqXHR ){
+            alert( jqXHR.statues );
+        }
+    });
+}
+
+function manualGetCount( url ){
+    $.ajax({
+        type : 'GET',
+        url : url,
+        dataType : "text",
+        success : function( data ){
+            alert( data );
+            return data;
+        },
+        error : function( jqXHR ){
+            alert( jqXHR.statues );
+        }
+    });
+}
+
+function sortByTags(){
+    for( i in tags ){
+
+    }
+}
+;
+
+$(function(){
+    $('.page-close a').click(function(){
+        $('#page').css({'display':'none'});
+    });
+
+});
