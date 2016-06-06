@@ -124,7 +124,6 @@ $(function(){
 
 
 
-function addCommentCount(){
     var disqus_domain,disqus_shortname;
 
     var ccc = function(){
@@ -186,5 +185,4 @@ function addCommentCount(){
                 }
         };
         return e
-    }());
-}
+    }();
