@@ -8,7 +8,7 @@ var data = page_data;
 var tags = [];
 var item_count = 0;
 var template = undefined;
-var comment_count = 'http://cloudred.disqus.com/count-data.js?';
+// var comment_count = 'http://cloudred.disqus.com/count-data.js?';
 
 var comUrlSet = [];
 
