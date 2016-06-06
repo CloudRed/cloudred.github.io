@@ -25,18 +25,6 @@ var page_data = [
         tags : ['SQL Injection']
     },
     {
-        title : '我的神奇的文章3',
-        date : '2016-5-28',
-        path : '/pages/2016/demo3/',
-        tags : ['Math']
-    },
-    {
-        title : '我的神奇的文章3',
-        date : '2016-5-28',
-        path : '/pages/2016/demo3/',
-        tags : ['Math']
-    },
-    {
         title : '我的神奇的文章4',
         date : '2016-5-28',
         path : '/pages/2016/demo4/',
@@ -94,6 +82,18 @@ var page_data = [
         title : '我的神奇的文章8',
         date : '2016-5-28',
         path : '/pages/2016/demo/',
+        tags : ['Math']
+    },
+    {
+        title : '我的神奇的文章3',
+        date : '2016-5-28',
+        path : '/pages/2016/demo3/',
+        tags : ['Math']
+    },
+    {
+        title : '我的神奇的文章3',
+        date : '2016-5-28',
+        path : '/pages/2016/demo3/',
         tags : ['Math']
     }
 ];
