@@ -1,6 +1,7 @@
 ;
 
 var PAGE_SHOW = 8; // 每页显示的条目数
+var HOST_NAME = 'https://cloudred.github.io';
 
 ;
 var data = page_data;
@@ -40,6 +41,8 @@ g('#wrap').innerHTML = html.join(' ');
 function addPage(){
     var html = [];
     var show_length = PAGE_SHOW;
+    var host_name = HOST_NAME;
+    var comment_count = '//cloudred.disqus..com/count-data.js?';
 
     if( data.length - item_count < PAGE_SHOW ){
         show_length = data.length - item_count;
@@ -49,6 +52,8 @@ function addPage(){
         var _html = template.replace( /{{title}}/g, data[i].title )
                                 .replace( /{{path}}/g, data[i].path )
                                 .replace( /{{date}}/g, data[i].date );
+        var c = '2=' + host_name + data[i].path + '#disqus_thread&';
+        comment_count += c;
         html.push( _html );
         for( s in data[i].tags){
             var _tag = data[i].tags[s];
@@ -63,8 +68,7 @@ function addPage(){
         g('#more').innerHTML = 'finished !';
     }
 
-    DISQUSWIDGETS.getCount();
-    DISQUSWIDGETS.displayCount();
+    $.getScript(comment_count);
 };
 
 
@@ -78,7 +82,21 @@ function showPage( path ){
             $('#page-context').html( data );
         },
         error : function( jqXHR ){
-            console.log( 123 );
+            alert( jqXHR.statues );
+        }
+    });
+}
+
+function manualGetCount( url ){
+    $.ajax({
+        type : 'GET',
+        url : url,
+        dataType : "text",
+        success : function( data ){
+            alert( data );
+            return data;
+        },
+        error : function( jqXHR ){
             alert( jqXHR.statues );
         }
     });
@@ -107,7 +125,6 @@ function addCommentCount(){
     var DISQUSWIDGETS,disqus_domain,disqus_shortname;
 
     typeof DISQUSWIDGETS==="undefined" && ( DISQUSWIDGETS = function(){
-        alert(123);
         var f=document,
             a=f.getElementById("dsq-count-scr"),
             a=a&&a.src.match(/(https?:)?\/\/(?:www\.)?([\w_\-]+)\.((?:dev\.)?disqus\.(?:com|org)(?::\d+)?)/i),
