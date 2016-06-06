@@ -40,41 +40,8 @@ for( i = 0; i < show_length; i++ ){
 item_count = i;
 g('#wrap').innerHTML = html.join(' ');
 
-
-
-function addPage(){
-    var html = [];
-    var show_length = PAGE_SHOW;
-    var host_name = HOST_NAME;
-
-    if( data.length - item_count < PAGE_SHOW ){
-        show_length = data.length - item_count;
-    }
-
-    for( i = item_count; i < show_length + item_count; i++ ){
-        var _html = template.replace( /{{title}}/g, data[i].title )
-                                .replace( /{{path}}/g, data[i].path )
-                                .replace( /{{date}}/g, data[i].date );
-
-        comUrlSet.push(HOST_NAME + data[i].path + '#disqus_thread');
-        html.push( _html );
-        for( s in data[i].tags){
-            var _tag = data[i].tags[s];
-            tags.push( _tag );
-        }
-    }
-
-    item_count = i;
-    g('#wrap').innerHTML += html.join(' ');
-
-    if( data.length == item_count ){
-        g('#more').innerHTML = 'finished !';
-    }
-
-    delete DISQUSWIDGETS;
-
-    var DISQUSWIDGETS,disqus_domain;
-    var disqus_shortname = 'cloudred';
+/////////////////////////////////////////////////////////////
+    var DISQUSWIDGETS,disqus_domain,disqus_shortname;
 
     var DISQUSWIDGETS = function(){
         var f=document,
@@ -137,6 +104,38 @@ function addPage(){
         };
         return e
     }();
+////////////////////////////////////////////////////////////
+
+
+function addPage(){
+    var html = [];
+    var show_length = PAGE_SHOW;
+    var host_name = HOST_NAME;
+
+    if( data.length - item_count < PAGE_SHOW ){
+        show_length = data.length - item_count;
+    }
+
+    for( i = item_count; i < show_length + item_count; i++ ){
+        var _html = template.replace( /{{title}}/g, data[i].title )
+                                .replace( /{{path}}/g, data[i].path )
+                                .replace( /{{date}}/g, data[i].date );
+
+        comUrlSet.push(HOST_NAME + data[i].path + '#disqus_thread');
+        html.push( _html );
+        for( s in data[i].tags){
+            var _tag = data[i].tags[s];
+            tags.push( _tag );
+        }
+    }
+
+    item_count = i;
+    g('#wrap').innerHTML += html.join(' ');
+
+    if( data.length == item_count ){
+        g('#more').innerHTML = 'finished !';
+    }
+
     DISQUSWIDGETS.getCount();    
 };
 
