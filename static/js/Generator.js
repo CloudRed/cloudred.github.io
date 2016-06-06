@@ -10,7 +10,6 @@ var item_count = 0;
 var template = undefined;
 var comment_count = '//cloudred.disqus.com/count-data.js?';
 
-var comUrlSet = [];
 
 
 template = g('#wrap').innerHTML;
@@ -29,7 +28,6 @@ for( i = 0; i < show_length; i++ ){
     var _html = template.replace( /{{title}}/g, data[i].title )
                             .replace( /{{path}}/g, data[i].path )
                             .replace( /{{date}}/g, data[i].date );
-    comUrlSet.push(HOST_NAME + data[i].path + '#disqus_thread');
     html.push( _html );
     for( s in data[i].tags){
         var _tag = data[i].tags[s];
@@ -120,8 +118,6 @@ function addPage(){
         var _html = template.replace( /{{title}}/g, data[i].title )
                                 .replace( /{{path}}/g, data[i].path )
                                 .replace( /{{date}}/g, data[i].date );
-
-        comUrlSet.push(HOST_NAME + data[i].path + '#disqus_thread');
         html.push( _html );
         for( s in data[i].tags){
             var _tag = data[i].tags[s];
