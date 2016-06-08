@@ -16,12 +16,6 @@
 
     <link rel="stylesheet" href="static/plugs/mCustomScrollbar/jquery.mCustomScrollbar.min.css">
 
-
-    <!--Google CDN jQuery with fallback to local -->
-    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="static/js/jquery-1.11.0.min.js"><\/script>')</script> -->
-    <script type="text/javascript" src="static/js/jquery-1.11.0.min.js"></script>
-
 </head>
 
 <body>
@@ -58,14 +52,20 @@
         <a href="#">&copy; CloudRed</a>
     </div> 
 
-    
+    <!--Google CDN jQuery with fallback to local -->
+<!--     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="static/js/jquery-1.11.0.min.js"><\/script>')</script>
+     -->
+    <script type="text/javascript" src="static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="static/js/GeneralTools.js"></script>
     <script type="text/javascript" src="pages/data.js"></script>
     <script type="text/javascript" src="static/js/Generator.js"></script>
 
 
     <script src="static/plugs/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="static/plugs/mCustomScrollbar/jquery.mousewheel.min.js"></script>
     <script>
+        // Seting Scrollbar object
         (function($){
            $(window).load(function(){   
                 $("body").mCustomScrollbar({
@@ -75,22 +75,14 @@
                     scrollInertia: "100"
                 });
                 $("#page").mCustomScrollbar({
+
                 });
             });
         })(jQuery);
     </script>
 
     <script>
-        /**
-        * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-        * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-        */
-        /*
-        var disqus_config = function () {
-        this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-        };
-        */
+        // Load DISQUS object
         (function() { // DON'T EDIT BELOW THIS LINE
             var d = document, s = d.createElement('script');
 
@@ -103,7 +95,8 @@
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
     
 
-    <div id="dsq-count-scr" data="http://cloudred.disqus.com/count.js"></div>
+    <a id="dsq-count-scr" href="http://cloudred.disqus.com/count.js" style="display: none"></a>
+
 
 </body>
 </html>
