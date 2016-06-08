@@ -1,5 +1,6 @@
 
 ;var PAGE_SHOW = 6; // 每页显示的条目数
+;var DISQUS_ROOT = 'http://cloudred.disqus.com';
 
 
 ;var PAGE_DATA = [

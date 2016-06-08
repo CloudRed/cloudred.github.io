@@ -2,6 +2,7 @@
 
 var page_show = PAGE_SHOW;
 var HOST_NAME = 'https://cloudred.github.io';
+var disqus_root = DISQUS_ROOT;
 
 var data = PAGE_DATA;
 var tags = [];
@@ -9,7 +10,7 @@ var item_count = 0;
 var template = g('#wrap').innerHTML;
 var DISQUSWIDGETS;
 var disqus_domain;
-var disqus_shortname = 'cloudred';
+var disqus_shortname;
 
 ;
 var html = [];
@@ -41,8 +42,7 @@ g('#wrap').innerHTML = html.join(' ');
 
 var DISQUSWIDGETS = function(){
     var f=document,
-        a=f.getElementById("dsq-count-scr"),
-        a=a&&a.data.match(/(https?:)?\/\/(?:www\.)?([\w_\-]+)\.((?:dev\.)?disqus\.(?:com|org)(?::\d+)?)/i),
+        a=disqus_root.match(/(https?:)?\/\/(?:www\.)?([\w_\-]+)\.((?:dev\.)?disqus\.(?:com|org)(?::\d+)?)/i),
         e={},
         s=f.head||f.body,
         j={},
@@ -102,35 +102,6 @@ DISQUSWIDGETS.getCount();
 ////////////////////////////////////////////////////////////
 
 
-function addPage(){
-    var html = [];
-    var show_length = page_show;
-
-    if( data.length - item_count < page_show ){
-        show_length = data.length - item_count;
-    }
-
-    for( i = item_count; i < show_length + item_count; i++ ){
-        var _html = template.replace( /{{title}}/g, data[i].title )
-                                .replace( /{{path}}/g, data[i].path )
-                                .replace( /{{date}}/g, data[i].date );
-        html.push( _html );
-        for( s in data[i].tags){
-            var _tag = data[i].tags[s];
-            tags.push( _tag );
-        }
-    }
-
-    item_count = i;
-    g('#wrap').innerHTML += html.join(' ');
-
-    if( data.length == item_count ){
-        g('#more').innerHTML = 'finished !';
-    }
-
-    DISQUSWIDGETS.getCount();    
-};
-
 
 function showPage( path ){
     $.ajax({
@@ -148,21 +119,6 @@ function showPage( path ){
     });
 }
 
-function manualGetCount( url ){
-    $.ajax({
-        type : 'GET',
-        url : url,
-        dataType : "text",
-        success : function( data ){
-            alert( data );
-            return data;
-        },
-        error : function( jqXHR ){
-            alert( jqXHR.statues );
-        }
-    });
-}
-
 function sortByTags(){
     for( i in tags ){
 
@@ -171,9 +127,39 @@ function sortByTags(){
 ;
 
 $(function(){
+    // close sigle page
     $('.page-close a').click(function(){
         $("body").mCustomScrollbar('update');
         $('#page').css({'display':'none'});
     });
 
+    // add pages
+    $('#more').click(function(){
+        var html = [];
+        var show_length = page_show;
+
+        if( data.length - item_count < page_show ){
+            show_length = data.length - item_count;
+        }
+
+        for( i = item_count; i < show_length + item_count; i++ ){
+            var _html = template.replace( /{{title}}/g, data[i].title )
+                                    .replace( /{{path}}/g, data[i].path )
+                                    .replace( /{{date}}/g, data[i].date );
+            html.push( _html );
+            for( s in data[i].tags){
+                var _tag = data[i].tags[s];
+                tags.push( _tag );
+            }
+        }
+
+        item_count = i;
+        g('#wrap').innerHTML += html.join(' ');
+
+        if( data.length == item_count ){
+            g('#more').innerHTML = 'finished !';
+        }
+
+        DISQUSWIDGETS.getCount(); 
+        });
 });

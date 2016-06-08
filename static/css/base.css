@@ -57,6 +57,7 @@ html, body{
     left: 0;
     background: rgba(0,0,0, 0.8);
     z-index: 999;
+    filter: blur(2px);
 }
 #page .page-close a{
     display: block;
