@@ -133,20 +133,14 @@ function addPage(){
 
 
 function showPage( path ){
-
-    // $('#mCSB_1_scrollbar_vertical').removeClass();
-    // $('#mCSB_1_scrollbar_vertical').attr('id',"");
-
-
     $.ajax({
         type : 'GET',
         url : path,
         dataType : "text",
         success : function( data ){
+            $("body").mCustomScrollbar('disable');
             $('#page').css({'display':'block'});
             $('#page-context').html( data );
-            $('#mCSB_1_scrollbar_vertical').attr('style','display:none');
-            alert('change');
         },
         error : function( jqXHR ){
             alert( jqXHR.statues );
@@ -178,6 +172,7 @@ function sortByTags(){
 
 $(function(){
     $('.page-close a').click(function(){
+        $("body").mCustomScrollbar('update');
         $('#page').css({'display':'none'});
     });
 
