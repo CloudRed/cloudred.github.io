@@ -1,5 +1,5 @@
 
-;var PAGE_SHOW = 3; // 每页显示的条目数
+;var PAGE_SHOW = 6; // 每页显示的条目数
 
 
 ;var PAGE_DATA = [
@@ -36,7 +36,7 @@
     {
         title : '我的神奇的文章6',
         date : '2016-5-28',
-        path : '/pages/2016/demo/',
+        path : 'pages/2016/demo/index.html',
         tags : ['Math']
     },
     {

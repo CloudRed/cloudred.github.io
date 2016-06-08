@@ -133,6 +133,11 @@ function addPage(){
 
 
 function showPage( path ){
+
+    // $('#mCSB_1_scrollbar_vertical').removeClass();
+    // $('#mCSB_1_scrollbar_vertical').attr('id',"");
+
+
     $.ajax({
         type : 'GET',
         url : path,
@@ -140,6 +145,8 @@ function showPage( path ){
         success : function( data ){
             $('#page').css({'display':'block'});
             $('#page-context').html( data );
+            $('body #mCSB_1_scrollbar_vertical').attr('style','display:none');
+            
         },
         error : function( jqXHR ){
             alert( jqXHR.statues );
