@@ -1,5 +1,5 @@
 
-;var PAGE_SHOW = 8; // 每页显示的条目数
+;var PAGE_SHOW = 3; // 每页显示的条目数
 
 
 ;var PAGE_DATA = [
