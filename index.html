@@ -4,6 +4,9 @@
     <meta charset="utf-8" />
     <title>CloudRed | Blog</title>
 
+    <link href="static/images/icon.png" rel="shortcut icon"/>
+    
+
     <link href="static/css/base.lib.min.css" rel="stylesheet" media="screen">
     <link href="static/css/layout.min.css" rel="stylesheet" media="screen">
 
@@ -22,9 +25,13 @@
 </head>
 
 <body>
+
+    <div class="header">
+        <h1><a href="https://cloudred.github.io">我的首页啊</a></h1>
+    </div> 
+
     <div class="container">
         <div class="scroll">
-            <h1><a href="https://cloudred.github.io">我的首页啊</a></h1>
 
             <div id="wrap">
                 <div class="">
@@ -40,15 +47,17 @@
                 <div id="page-context"></div>
             </div>
 
-            <div class="footer">
-                <a id="more" href="javascript:;" onclick="addPage();">more</a>
-                <hr />
-                <a href="#">&copy; CloudRed</a>
-            </div> 
+
 
                      
         </div>
     </div>
+    <div class="footer">
+        <a id="more" href="javascript:;" onclick="addPage();">more</a>
+        <hr />
+        <a href="#">&copy; CloudRed</a>
+    </div> 
+
     
     <script type="text/javascript" src="static/js/GeneralTools.js"></script>
     <script type="text/javascript" src="pages/data.js"></script>
@@ -60,7 +69,10 @@
         (function($){
            $(window).load(function(){            
                 $("body").mCustomScrollbar({
-                    autoHideScrollbar : true
+                    axis : 'xy',
+                    theme : 'minimal',
+                    autoHideScrollbar : true,
+                    scrollInertia: "100"
                 });
                 $("#page").mCustomScrollbar({
                 });
@@ -91,7 +103,7 @@
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
     
 
-    <div id="dsq-count-scr" src="http://cloudred.disqus.com/count.js"></div>
+    <div id="dsq-count-scr" data="http://cloudred.disqus.com/count.js"></div>
 
 </body>
 </html>

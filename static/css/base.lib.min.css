@@ -4424,10 +4424,10 @@ input.span1, textarea.span1, .uneditable-input.span1 {
 }
 }
 @media (max-width: 767px) {
-body {
+/*body {
     padding-left: 20px;
     padding-right: 20px;
-}
+}*/
 .navbar-fixed-top, .navbar-fixed-bottom, .navbar-static-top {
     margin-left: -20px;
     margin-right: -20px;
