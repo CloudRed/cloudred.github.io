@@ -145,8 +145,8 @@ function showPage( path ){
         success : function( data ){
             $('#page').css({'display':'block'});
             $('#page-context').html( data );
-            $('body #mCSB_1_scrollbar_vertical').attr('style','display:none');
-            
+            $('#mCSB_1_scrollbar_vertical').attr('style','display:none');
+            alert('change');
         },
         error : function( jqXHR ){
             alert( jqXHR.statues );
