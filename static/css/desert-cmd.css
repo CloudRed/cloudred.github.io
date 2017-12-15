@@ -1,0 +1,139 @@
+
+html,
+body{
+    background-color: #333;
+    color: #d6dbdf;
+}
+
+ul.dropdown-menu li > a {
+    color: #bbb;
+}
+ul.dropdown-menu li > a:hover {
+    color: #fff;
+}
+
+.sequence-diagram [fill="#ffffff"], .flow-diagram [fill="#ffffff"] {
+    fill: #333;
+}
+.sequence-diagram [stroke="#000000"], .flow-diagram [stroke="#000000"] {
+    stroke: #d6dbdf;
+}
+.sequence-diagram [fill="#000"], .flow-diagram [fill="#000"], .sequence-diagram [fill="#000000"], .flow-diagram [fill="#000000"], .sequence-diagram [fill="black"], .flow-diagram [fill="black"] {
+    fill: #d6dbdf;
+}
+.MathJax_SVG [stroke="black"] {
+    stroke: #d6dbdf;
+}
+.MathJax_SVG [fill="black"] {
+    fill: #d6dbdf;
+}
+
+.highlight-blue {
+    background-color: rgba(168, 209, 255, 0.5);
+}
+
+.remark-item {
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+.remark-options li {
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+
+pre .nocode {
+    color: #000;
+}
+pre .str {
+    color: #ffa0a0;
+}
+pre .kwd {
+    color: #f0e68c;
+    font-weight: bold;
+}
+pre .com {
+    color: #87ceeb;
+}
+pre .typ {
+    color: #98fb98;
+}
+pre .lit {
+    color: #cd5c5c;
+}
+pre .pun {
+    color: #fff;
+}
+pre .pln {
+    color: #fff;
+}
+pre .tag {
+    color: #f0e68c;
+    font-weight: bold;
+}
+pre .atn {
+    color: #bdb76b;
+    font-weight: bold;
+}
+pre .atv {
+    color: #ffa0a0;
+}
+pre .dec {
+    color: #98fb98;
+}
+ol.linenums {
+    color: #666;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+ol.linenums {
+    margin-left: 35px;
+}
+ol.linenums > li {
+    padding-left: 15px;
+}
+pre.prettyprint {
+    background-color: #222;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset, 45px 0 0 rgba(0, 0, 0, 0.25) inset, 0 1px 0 #222;
+    display: block;
+    padding: 9.5px;
+}
+li.L1, li.L3, li.L5, li.L7, li.L9 {
+}
+@media print {
+pre.prettyprint {
+}
+pre .str, code .str {
+    color: #060;
+}
+pre .kwd, code .kwd {
+    color: #006;
+    font-weight: bold;
+}
+pre .com, code .com {
+    color: #600;
+    font-style: italic;
+}
+pre .typ, code .typ {
+    color: #404;
+    font-weight: bold;
+}
+pre .lit, code .lit {
+    color: #044;
+}
+pre .pun, code .pun {
+    color: #440;
+}
+pre .pln, code .pln {
+    color: #000;
+}
+pre .tag, code .tag {
+    color: #006;
+    font-weight: bold;
+}
+pre .atn, code .atn {
+    color: #404;
+}
+pre .atv, code .atv {
+    color: #060;
+}
+}

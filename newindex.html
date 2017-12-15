@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>CloudRed | Blog</title>
+
+    <link href="static/images/icon.png" rel="shortcut icon"/>
+    
+
+    <!-- <link href="static/css/base.lib.min.css" rel="stylesheet" media="screen"> -->
+    <!-- <link href="static/css/layout.min.css" rel="stylesheet" media="screen"> -->
+
+    <!-- <link id="prettify-style" href="static/css/desert-cmd.css" type="text/css" rel="stylesheet"> -->
+
+    <!-- <link id="prettify-style" href="static/css/prettify-cmd.css" type="text/css" rel="stylesheet"> -->
+
+    <link href="static/css/base.css" type="text/css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="static/plugs/mCustomScrollbar/jquery.mCustomScrollbar.min.css">
+    <link rel="stylesheet" href="newindex.css" />
+</head>
+
+<body onresize="sizechange()">
+    
+<!-- nav begin -->
+<!-- <div class=""> -->
+    <div class="s-window">
+        <!-- <input type="radio" name="radio-set" id="st-control-1" /> -->
+        <!-- <input type="radio" name="radio-set" id="st-control-2" /> -->
+        <!-- nav end -->
+        <!-- content begin -->
+        <div class="s-scroll">
+
+            <section class="s-panel main" id="s-panel-1">
+                <!-- FOOTER -->
+                <div class="main-footer">
+                    <a href="#">&copy; CloudRed</a>
+                </div>
+
+                <!-- content -->
+                <div class="m-scroll">
+                    <!-- <div class="bg"></div> -->
+
+                    <div class="main-barrie">
+                        <div class="main-wrap">
+                            <div class="wrap-top">
+                                <a href="https://cloudred.github.io">
+                                    <img src='static/images/icon-source.png'/ width="140" height="140">
+                                </a>
+                                <h1>HELLO! I AM CLOUDRED</h1>
+                            </div>
+                            <div class="wrap-bottom">
+                                <i class="split"></i>
+
+                                <ul>
+                                    <li><a id="ac" href="javascript:;"><i class="icon-file-text"></i></a></li>
+                                    <li><a href="mailto:withoutrule14@gmail.com"><i class="icon-envelope-alt"></i></a></li>
+                                    <li><a href="https://github.com/CloudRed"><i class="icon-github"></i></a></li>
+                                    <li><a href="javascript:;"><i class="icon-user"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                             
+                </div>
+            </section>
+
+            <section class="s-panel st-color" id="s-panel-2">
+                <p>This is my smooth transition test page 2 !</p>
+            </section>
+
+        </div>
+    </div>
+<!-- </div> -->
+
+<script type="text/javascript" src="static/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="static/js/GeneralTools.js"></script>
+<!-- <script type="text/javascript" src="pages/data.js"></script> -->
+<script type="text/javascript" src="static/js/Generator.js"></script>
+
+<script src="static/plugs/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<script src="static/plugs/mCustomScrollbar/jquery.mousewheel.min.js"></script>
+<script>
+    // Seting Scrollbar object
+    (function($){
+       $(window).load(function(){   
+            $(".main").mCustomScrollbar({
+                // axis : 'xy',
+                theme : 'minimal',
+                // theme : 'dark',
+                autoHideScrollbar : true,
+                scrollInertia: 0,
+            });
+        });
+    })(jQuery);
+    $(".m-scroll").css({'height':$('body').height()})
+    function sizechange(){
+        $(".m-scroll").css({'height':$('body').height()})
+    }
+</script>
+
+</body>
+</html>

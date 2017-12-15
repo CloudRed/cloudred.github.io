@@ -1,0 +1,468 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>BASH</title>
+</head>
+<body>
+<div id="wmd-preview" class="wmd-preview"><div class="md-section-divider"></div><div class="md-section-divider"></div><h1 data-anchor-id="6lxh" id="bash">BASH</h1><p data-anchor-id="20fb"><code>bash</code></p><hr><p data-anchor-id="gyal"><div class="toc">
+<ul>
+<li><a href="#bash">BASH</a><ul>
+<li><a href="#0x00-shell变量">0x00. Shell变量</a><ul>
+<li><a href="#1-环境变量和用户自定义变量">1. 环境变量和用户自定义变量</a></li>
+<li><a href="#2-位置参数变量">2. 位置参数变量</a></li>
+<li><a href="#3-预定义变量">3. 预定义变量</a></li>
+</ul>
+</li>
+<li><a href="#0x02-变量与运算">0x02. 变量与运算</a><ul>
+<li><a href="#1-变量类型与declare">1. 变量类型与declare</a></li>
+<li><a href="#2-数值运算">2. 数值运算</a></li>
+<li><a href="#3-变量测试">3. 变量测试</a></li>
+</ul>
+</li>
+<li><a href="#0x03-环境变量配置文件">0x03. 环境变量配置文件</a><ul>
+<li><a href="#1-配置生效">1. 配置生效</a></li>
+<li><a href="#2-登录载入配置文件">2. 登录载入配置文件</a></li>
+<li><a href="#3-注销配置文件">3. 注销配置文件</a></li>
+<li><a href="#4-历史命令配置文件">4. 历史命令配置文件</a></li>
+<li><a href="#5-欢迎信息配置文件">5. 欢迎信息配置文件</a></li>
+</ul>
+</li>
+<li><a href="#0x04-字符串处理">0x04. 字符串处理</a><ul>
+<li><a href="#1基础正则">1.基础正则</a></li>
+<li><a href="#2-字符串截取命令">2. 字符串截取命令</a></li>
+<li><a href="#3-简单字符处理">3. 简单字符处理</a></li>
+</ul>
+</li>
+<li><a href="#0x05-流程控制">0x05. 流程控制</a><ul>
+<li><a href="#1-test测试">1. test测试( [ ] )</a></li>
+<li><a href="#2-if-语句">2. if 语句</a></li>
+<li><a href="#3-case语句">3. case语句</a></li>
+<li><a href="#4-for遍历">4. for遍历</a></li>
+<li><a href="#5-while循环和until循环">5. while循环和until循环</a></li>
+</ul>
+</li>
+<li><a href="#0x-系统权限">0x. 系统权限</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</p><div class="md-section-divider"></div><h2 data-anchor-id="abg7" id="0x00-shell变量">0x00. Shell变量</h2><div class="md-section-divider"></div><h3 data-anchor-id="lhxw" id="1-环境变量和用户自定义变量">1. 环境变量和用户自定义变量</h3><ul data-anchor-id="2xw9">
+<li>用户自定义变量是局部变量</li>
+<li>环境变量是全局变量</li>
+</ul><p data-anchor-id="uxzu">1) 基本玩法</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="uklw"><ol class="linenums"><li class="L0"><code><span class="kwd">export</span><span class="pln"> x</span><span class="pun">=</span><span class="pln">qwe  </span><span class="com">// 定义环境变量</span></code></li><li class="L1"><code></code></li><li class="L2"><code><span class="com">// 或者</span></code></li><li class="L3"><code></code></li><li class="L4"><code><span class="pln">x</span><span class="pun">=</span><span class="pln">qwe    </span><span class="com">// 1. 用户自定义变量</span></code></li><li class="L5"><code><span class="kwd">export</span><span class="pln"> x </span><span class="com">// 2. 将x变成环境变量</span></code></li><li class="L6"><code></code></li><li class="L7"><code><span class="kwd">set</span><span class="pln"> </span><span class="com">// 查看所有变量</span></code></li><li class="L8"><code><span class="pln">env </span><span class="com">// 查看环境变量</span></code></li><li class="L9"><code><span class="pln">unset x </span><span class="com">// 删除变量x</span></code></li></ol></pre><p data-anchor-id="dy62">2) 变量叠加</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="5waf"><ol class="linenums"><li class="L0"><code><span class="pln">x</span><span class="pun">=</span><span class="lit">123</span></code></li><li class="L1"><code><span class="pln">echo $x </span><span class="com">// 123</span></code></li><li class="L2"><code><span class="pln">x</span><span class="pun">=</span><span class="str">"$x"</span><span class="lit">456</span></code></li><li class="L3"><code><span class="pln">echo $x </span><span class="com">// 123456</span></code></li></ol></pre><p data-anchor-id="c860">3) 利用 <code>PS1</code> 变量修改操作提示符格式 <br>
+    - \d 显示日期 “星期 月 日” <br>
+    - \H 显示完整主机名 <br>
+    - \t 显示24小时时间 HH:MM:SS <br>
+    - \A 显示24小时时间 HH:MM <br>
+    - \u 显示当前用户名 <br>
+    - \w 显示当前所在目录完整名称 <br>
+    - \W 显示当前所在目录最后一个目录 <br>
+    - <span>$</span> 提示符。root用户-#，普通用户-$</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="pzus"><ol class="linenums"><li class="L0"><code><span class="pun">[</span><span class="pln">root@localhost sh</span><span class="pun">]#</span><span class="pln"> echo $PS1</span></code></li><li class="L1"><code><span class="pun">[</span><span class="pln">\u</span><span class="pun">@</span><span class="pln">\h \W</span><span class="pun">]</span><span class="pln">\$</span></code></li><li class="L2"><code><span class="pun">[</span><span class="pln">root@localhost sh</span><span class="pun">]#</span><span class="pln"> PS1</span><span class="pun">=</span><span class="str">'[\u@\A \w] '</span></code></li><li class="L3"><code><span class="pun">[</span><span class="pln">root@17</span><span class="pun">:</span><span class="lit">21</span><span class="pln"> </span><span class="pun">~/</span><span class="pln">sh</span><span class="pun">]</span></code></li></ol></pre><ul data-anchor-id="vpnk">
+<li><code>PS2</code> 命令换行提示符，类似还有 <code>PS4</code></li>
+</ul><p data-anchor-id="b77k">4) 语系变量</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="3vgc"><ol class="linenums"><li class="L0"><code><span class="pln">locale </span><span class="com">// 查看当前语系</span></code></li><li class="L1"><code><span class="pln">echo $LANG </span><span class="com">// 查看当前语系</span></code></li><li class="L2"><code><span class="pln">LANG</span><span class="pun">=</span><span class="pln">en_US</span><span class="pun">.</span><span class="pln">UTF</span><span class="pun">-</span><span class="lit">8</span><span class="pln"> </span><span class="com">// 定义主题语系</span></code></li></ol></pre><p data-anchor-id="ko31"><code>/etc/sysconfig/i18n</code> 中存放下次开机后系统启动加载的语系</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="k9py"><ol class="linenums"><li class="L0"><code><span class="com">/* /etc/sysconfig/i18n */</span></code></li><li class="L1"><code><span class="pln">LANG</span><span class="pun">=</span><span class="str">"zh_CN.UTF-8"</span></code></li></ol></pre><div class="md-section-divider"></div><h3 data-anchor-id="vru1" id="2-位置参数变量">2. 位置参数变量</h3><table data-anchor-id="92h5" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th style="text-align:center;">变量</th>
+ <th style="text-align:left;">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td style="text-align:center;">&nbsp;&nbsp;<span>$</span>n&nbsp;&nbsp;</td>
+ <td style="text-align:left;">n为数字，<span>$</span>0 代表命令本身，<span>$</span>1 - <span>$</span>9代表第一到第九个参数，十个以上这样写 <span>$</span>{10}</td>
+</tr>
+<tr>
+ <td style="text-align:center;"><span>$</span>*</td>
+ <td style="text-align:left;">表示所有的参数，但是 <span>$</span>* 把所有参数堪称一个整体</td>
+</tr>
+<tr>
+ <td style="text-align:center;"><span>$</span>@</td>
+ <td style="text-align:left;">表示所有参数，但是 <span>$</span>@ 可以把每个参数单独存放，<font color="red">可用于遍历</font></td>
+</tr>
+<tr>
+ <td style="text-align:center;"><span>$</span>#</td>
+ <td style="text-align:left;">表示中参数个数</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="0t5h"><ol class="linenums"><li class="L0"><code class="language-bash"><span class="pun">---</span><span class="pln"> shell</span><span class="pun">.</span><span class="pln">sh </span><span class="pun">---</span></code></li><li class="L1"><code class="language-bash"><span class="com">#!/bin/bash</span></code></li><li class="L2"><code class="language-bash"><span class="pln">num1</span><span class="pun">=</span><span class="pln">$1</span></code></li><li class="L3"><code class="language-bash"><span class="pln">num2</span><span class="pun">=</span><span class="pln">$2</span></code></li><li class="L4"><code class="language-bash"><span class="pln">sum</span><span class="pun">=</span><span class="pln">$</span><span class="pun">((</span><span class="pln">$num1 </span><span class="pun">+</span><span class="pln"> $num2</span><span class="pun">))</span></code></li><li class="L5"><code class="language-bash"></code></li><li class="L6"><code class="language-bash"><span class="pln">echo $sum</span></code></li><li class="L7"><code class="language-bash"><span class="pun">------</span></code></li><li class="L8"><code class="language-bash"><span class="pun">[</span><span class="pln">root@localhost sh</span><span class="pun">]#</span><span class="pln"> </span><span class="pun">./</span><span class="pln">shell</span><span class="pun">.</span><span class="pln">sh </span><span class="lit">12</span><span class="pln"> </span><span class="lit">34</span><span class="pln"> </span></code></li><li class="L9"><code class="language-bash"><span class="pun">[</span><span class="pln">root@localhost sh</span><span class="pun">]#</span><span class="pln"> </span><span class="lit">46</span></code></li></ol></pre><div class="md-section-divider"></div><h3 data-anchor-id="1ply" id="3-预定义变量">3. 预定义变量</h3><table data-anchor-id="uath" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th style="text-align:center;">变量</th>
+ <th style="text-align:left;">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td style="text-align:center;">&nbsp;&nbsp;<span>$</span>?&nbsp;&nbsp;</td>
+ <td style="text-align:left;">最后一次执行命令的返回状态。0表示上一命令执行成功；非0值表示上一命令执行失败，具体值命令决定</td>
+</tr>
+<tr>
+ <td style="text-align:center;"><span>$</span><span>$</span></td>
+ <td style="text-align:left;">当前进程的PID</td>
+</tr>
+<tr>
+ <td style="text-align:center;"><span>$</span>!</td>
+ <td style="text-align:left;">后台运行最后一个进程的PID</td>
+</tr>
+</tbody></table><ul data-anchor-id="n95f">
+<li>逻辑运算符可像python或JS中一样的使用（&amp;&amp; 和 ||），其判断根据就是 <code>$?</code></li>
+</ul><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="ilp1"><ol class="linenums"><li class="L0"><code><span class="pun">[</span><span class="pln">root@localhost sh</span><span class="pun">]#</span><span class="pln"> ls </span><span class="pun">&amp;&amp;</span><span class="pln"> echo </span><span class="lit">123</span></code></li><li class="L1"><code><span class="pln">cs1</span><span class="pun">.</span><span class="pln">sh  cs2</span><span class="pun">.</span><span class="pln">sh  read</span><span class="pun">.</span><span class="pln">sh</span></code></li><li class="L2"><code><span class="lit">123</span></code></li><li class="L3"><code><span class="pun">[</span><span class="pln">root@localhost sh</span><span class="pun">]#</span><span class="pln"> ls </span><span class="pun">||</span><span class="pln"> echo </span><span class="lit">123</span></code></li><li class="L4"><code><span class="pln">cs1</span><span class="pun">.</span><span class="pln">sh  cs2</span><span class="pun">.</span><span class="pln">sh  read</span><span class="pun">.</span><span class="pln">sh</span></code></li><li class="L5"><code><span class="pun">[</span><span class="pln">root@localhost sh</span><span class="pun">]#</span><span class="pln"> ls asdf </span><span class="pun">||</span><span class="pln"> echo </span><span class="lit">123</span></code></li><li class="L6"><code><span class="pln">ls</span><span class="pun">:</span><span class="pln"> </span><span class="pun">无法访问</span><span class="pln">asdf</span><span class="pun">:</span><span class="pln"> </span><span class="pun">没有那个文件或目录</span></code></li><li class="L7"><code><span class="lit">123</span></code></li><li class="L8"><code></code></li><li class="L9"><code><span class="com"># 如下方法可以判断一个命令是否正确执行</span></code></li><li class="L0"><code><span class="pln">cmd </span><span class="pun">&amp;&amp;</span><span class="pln"> echo </span><span class="str">"yes"</span><span class="pln"> </span><span class="pun">||</span><span class="pln"> echo </span><span class="str">"no"</span></code></li><li class="L1"><code><span class="com"># 若 cmd 正确执行打印yes，不正确执行打印no</span></code></li></ol></pre><ul data-anchor-id="6l7y">
+<li>read [选项][变量名] <br>
+<ul><li>-p "提示信息" : 等待输入时显示的提示信息</li>
+<li>-t num : num是等待用户输入的时间，超时则自动往后执行</li>
+<li>-n num : 规定命令只能接收的字符数为num个，输入num个字符后就会自动往后执行</li>
+<li>-s : 隐藏输入的数据，密码输入的实现</li></ul></li>
+</ul><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="vt16"><ol class="linenums"><li class="L0"><code><span class="com">#!/bin/bash</span></code></li><li class="L1"><code><span class="pln">read </span><span class="pun">-</span><span class="pln">p </span><span class="str">"type ur name : "</span><span class="pln"> </span><span class="pun">-</span><span class="pln">t </span><span class="lit">30</span><span class="pln"> name</span></code></li><li class="L2"><code><span class="pln">echo $name</span></code></li><li class="L3"><code><span class="pln">read </span><span class="pun">-</span><span class="pln">p </span><span class="str">"ur passward : "</span><span class="pln"> </span><span class="pun">-</span><span class="pln">s </span><span class="pun">-</span><span class="pln">n </span><span class="lit">16</span><span class="pln"> psd</span></code></li><li class="L4"><code><span class="pln">echo $psd</span></code></li></ol></pre><hr><div class="md-section-divider"></div><h2 data-anchor-id="b2g5" id="0x02-变量与运算">0x02. 变量与运算</h2><div class="md-section-divider"></div><h3 data-anchor-id="byko" id="1-变量类型与declare">1. 变量类型与declare</h3><ul data-anchor-id="yndj">
+<li>shell中的变量默认是字符串类型</li>
+<li>declare用于改变变量的类型</li>
+<li>declare [+/-][选项] 变量名 <br>
+<ul><li>-： 给变量设定类型属性</li>
+<li>+： 取消变量的类型属性</li>
+<li>-a：将变量声明为数组</li>
+<li>-i：整数型</li>
+<li>-x：声明为环境变量</li>
+<li>-r：声明为只读变量</li>
+<li>-p：显示变量被声明的类型</li></ul></li>
+</ul><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="kp9h"><ol class="linenums"><li class="L0"><code class="language-bash"><span class="pun">---</span><span class="pln"> int </span><span class="pun">---</span></code></li><li class="L1"><code class="language-bash"><span class="pun">[</span><span class="pln">root@localhost sh</span><span class="pun">]#</span><span class="pln"> declare </span><span class="pun">-</span><span class="pln">i c</span><span class="pun">=</span><span class="lit">1</span><span class="pun">+</span><span class="lit">1</span></code></li><li class="L2"><code class="language-bash"><span class="pun">[</span><span class="pln">root@localhost sh</span><span class="pun">]#</span><span class="pln"> echo $c</span></code></li><li class="L3"><code class="language-bash"><span class="lit">2</span></code></li><li class="L4"><code class="language-bash"><span class="pun">---</span><span class="pln"> array </span><span class="pun">---</span></code></li><li class="L5"><code class="language-bash"><span class="pun">[</span><span class="pln">root@localhost sh</span><span class="pun">]#</span><span class="pln"> m</span><span class="pun">[</span><span class="lit">0</span><span class="pun">]=</span><span class="pln">cls </span><span class="com">#并不需要严格的declare声明</span></code></li><li class="L6"><code class="language-bash"><span class="pun">[</span><span class="pln">root@localhost sh</span><span class="pun">]#</span><span class="pln"> m</span><span class="pun">[</span><span class="lit">1</span><span class="pun">]=</span><span class="pln">bdls </span></code></li><li class="L7"><code class="language-bash"><span class="pun">[</span><span class="pln">root@localhost sh</span><span class="pun">]#</span><span class="pln"> declare </span><span class="pun">-</span><span class="pln">a m</span><span class="pun">[</span><span class="lit">2</span><span class="pun">]=</span><span class="pln">lls</span></code></li><li class="L8"><code class="language-bash"><span class="pun">[</span><span class="pln">root@localhost sh</span><span class="pun">]#</span><span class="pln"> echo $</span><span class="pun">{</span><span class="pln">m</span><span class="pun">}</span></code></li><li class="L9"><code class="language-bash"><span class="pln">cls</span></code></li><li class="L0"><code class="language-bash"><span class="pun">[</span><span class="pln">root@localhost sh</span><span class="pun">]#</span><span class="pln"> echo $</span><span class="pun">{</span><span class="pln">m</span><span class="pun">[</span><span class="lit">1</span><span class="pun">]}</span></code></li><li class="L1"><code class="language-bash"><span class="pln">bdls</span></code></li><li class="L2"><code class="language-bash"><span class="pun">[</span><span class="pln">root@localhost sh</span><span class="pun">]#</span><span class="pln"> echo $</span><span class="pun">{</span><span class="pln">m</span><span class="pun">[*]}</span></code></li><li class="L3"><code class="language-bash"><span class="pln">cls bdls lls</span></code></li></ol></pre><ul data-anchor-id="o0yg">
+<li><p>环境变量声明 <br>
+<code>declare -x</code> 和 <code>export</code> 声明的环境变量一样，<code>export</code> 最终用的是 <code>declare -x</code> 来实现环境变量的声明。</p></li>
+<li><p><code>declare -p</code> 不加变量名就会查看全部变量声明信息，加上变量名就会查看该变量声明</p></li>
+<li><code>declare -r</code> 会指定只读变量，<font color="red">非常不好用，一旦声明后，完全不可更改</font>（不可删除、不可改写、不可取消属性，很恶心）</li>
+</ul><div class="md-section-divider"></div><h3 data-anchor-id="n80p" id="2-数值运算">2. 数值运算</h3><ul data-anchor-id="oiw5">
+<li>用declare进行数值运算</li>
+</ul><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="4zil"><ol class="linenums"><li class="L0"><code class="language-bash"><span class="pln">aa</span><span class="pun">=</span><span class="lit">1</span></code></li><li class="L1"><code class="language-bash"><span class="pln">bb</span><span class="pun">=</span><span class="lit">2</span></code></li><li class="L2"><code class="language-bash"><span class="pln">declare </span><span class="pun">-</span><span class="pln">i cc</span><span class="pun">=</span><span class="pln">$aa</span><span class="pun">+</span><span class="pln">$bb </span><span class="pun">//</span><span class="pln"> cc</span><span class="pun">=</span><span class="lit">3</span></code></li></ol></pre><ul data-anchor-id="kgw9">
+<li>用expr或者let数值运算工具</li>
+</ul><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="xe8s"><ol class="linenums"><li class="L0"><code><span class="pln">aa</span><span class="pun">=</span><span class="lit">1</span></code></li><li class="L1"><code><span class="pln">bb</span><span class="pun">=</span><span class="lit">2</span></code></li><li class="L2"><code><span class="pln">cc</span><span class="pun">=</span><span class="pln">$</span><span class="pun">(</span><span class="pln">expr $aa </span><span class="pun">+</span><span class="pln"> $bb</span><span class="pun">)</span></code></li><li class="L3"><code><span class="com"># expr或者let都一样，并且运算符前后的空格不能省略</span></code></li></ol></pre><ul data-anchor-id="8wxy">
+<li><span>$</span>(()) 或者 <span>$</span>[] &nbsp;&nbsp;<font color="red">* 推荐使用</font></li>
+</ul><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="jb2i"><ol class="linenums"><li class="L0"><code><span class="com"># 推荐用$(())</span></code></li><li class="L1"><code><span class="pln">cc</span><span class="pun">=</span><span class="pln">$</span><span class="pun">((</span><span class="pln">$aa </span><span class="pun">+</span><span class="pln">$bb</span><span class="pun">))</span></code></li><li class="L2"><code><span class="pln">$</span><span class="pun">[</span><span class="pln">$aa</span><span class="pun">+</span><span class="pln"> $bb</span><span class="pun">]</span></code></li><li class="L3"><code><span class="com"># 括号内的空格无要求</span></code></li></ol></pre><ul data-anchor-id="losy">
+<li><code>g=$(命令)</code> 表示先执行命令，并把命令执行结果赋值给变量g，其作用等同与反引号 <code>``</code> 。</li>
+</ul><div class="md-section-divider"></div><h3 data-anchor-id="w44p" id="3-变量测试">3. 变量测试</h3><table data-anchor-id="sjv2" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th style="text-align:center;">变量置换方式</th>
+ <th style="text-align:center;">y不存在</th>
+ <th style="text-align:center;">y值为空</th>
+ <th style="text-align:center;">y不为空</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td style="text-align:center;">x=<span>$</span>{y-new}</td>
+ <td style="text-align:center;">x=new</td>
+ <td style="text-align:center;">x为空</td>
+ <td style="text-align:center;">x=<span>$</span>y</td>
+</tr>
+<tr>
+ <td style="text-align:center;">x=<span>$</span>{y:-new}</td>
+ <td style="text-align:center;">x=new</td>
+ <td style="text-align:center;">x=new</td>
+ <td style="text-align:center;">x=<span>$</span>y</td>
+</tr>
+<tr>
+ <td style="text-align:center;">x=<span>$</span>{y+new}</td>
+ <td style="text-align:center;">x为空</td>
+ <td style="text-align:center;">x=new</td>
+ <td style="text-align:center;">x=new</td>
+</tr>
+<tr>
+ <td style="text-align:center;">x=<span>$</span>{y:+new}</td>
+ <td style="text-align:center;">x为空</td>
+ <td style="text-align:center;">x为空</td>
+ <td style="text-align:center;">x=new</td>
+</tr>
+<tr>
+ <td style="text-align:center;">x=<span>$</span>{y=new}</td>
+ <td style="text-align:center;">x=new<br>y=new</td>
+ <td style="text-align:center;">x为空<br>y不变</td>
+ <td style="text-align:center;">x=<span>$</span>y<br>y不变</td>
+</tr>
+<tr>
+ <td style="text-align:center;">x=<span>$</span>{y:=new}</td>
+ <td style="text-align:center;">x=new<br>y=new</td>
+ <td style="text-align:center;">x=new<br>y=new</td>
+ <td style="text-align:center;">x=<span>$</span>y<br>y不变</td>
+</tr>
+<tr>
+ <td style="text-align:center;">x=<span>$</span>{y?new}</td>
+ <td style="text-align:center;">new输出到stderr</td>
+ <td style="text-align:center;">x为空</td>
+ <td style="text-align:center;">x=<span>$</span>y</td>
+</tr>
+<tr>
+ <td style="text-align:center;">x=<span>$</span>{y:?new}</td>
+ <td style="text-align:center;">new输出到stderr</td>
+ <td style="text-align:center;">new输出到stderr</td>
+ <td style="text-align:center;">x=<span>$</span>y</td>
+</tr>
+</tbody></table><p data-anchor-id="0dkf"><font color="red">注：new表示新值，stderr（标准错误）会显示在屏幕上。</font></p><hr><div class="md-section-divider"></div><h2 data-anchor-id="oq21" id="0x03-环境变量配置文件">0x03. 环境变量配置文件</h2><div class="md-section-divider"></div><h3 data-anchor-id="zsb5" id="1-配置生效">1. 配置生效</h3><ul data-anchor-id="9yow">
+<li><code>source 配置文件</code> 重新加载配置文件，可以免去更改配置文件需要注销的问题。</li>
+</ul><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="jx42"><ol class="linenums"><li class="L0"><code><span class="pln">source filename</span></code></li><li class="L1"><code><span class="pun">.</span><span class="pln"> filename</span></code></li><li class="L2"><code><span class="com"># .是source命令的简写</span></code></li></ol></pre><div class="md-section-divider"></div><h3 data-anchor-id="ur1s" id="2-登录载入配置文件">2. 登录载入配置文件</h3><pre data-anchor-id="90v5"><code>/etc/profile
+/etc/profile.d/*.sh
+/etc/bashrc
+~/.bash_profile
+~/.bashrc`
+</code></pre><p data-anchor-id="7jsz">登录加载配置顺序：</p><p data-anchor-id="y47d">1) 常规登录</p><blockquote data-anchor-id="s4d6" class="white-blockquote">
+  <p>通过用户名密码从系统外部登录</p>
+</blockquote><div class="md-section-divider"></div><div class="flow-diagram theme theme-white" title="点击查看大图" data-anchor-id="7wb6"><svg height="43" version="1.1" width="721.5" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;" viewBox="0 0 721.5 43" preserveAspectRatio="xMidYMid meet"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.2</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block-obj1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><marker id="raphael-marker-endblock33-obj2" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block-obj1" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker></defs><rect x="0" y="0" width="87" height="37" r="20" rx="20" ry="20" fill="#ffffff" stroke="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" stroke-width="2" class="flowchart" id="a1" transform="matrix(1,0,0,1,35.5,4)"></rect><text x="10" y="18.5" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" id="a1t" class="flowchartt" font-size="15px" transform="matrix(1,0,0,1,35.5,4)" stroke-width="1"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">/etc/profile</tspan></text><rect x="0" y="0" width="129" height="37" r="0" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" stroke-width="2" class="flowchart" id="a2" transform="matrix(1,0,0,1,187,4)"></rect><text x="10" y="18.5" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" id="a2t" class="flowchartt" font-size="15px" transform="matrix(1,0,0,1,187,4)" stroke-width="1"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">/etc/profile.d/*.sh</tspan></text><rect x="0" y="0" width="150" height="37" r="0" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" stroke-width="2" class="flowchart" id="a3" transform="matrix(1,0,0,1,370,4)"></rect><text x="10" y="18.5" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" id="a3t" class="flowchartt" font-size="15px" transform="matrix(1,0,0,1,370,4)" stroke-width="1"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">/etc/profile.d/lang.sh</tspan></text><rect x="0" y="0" width="141" height="37" r="0" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" stroke-width="2" class="flowchart" id="a4" transform="matrix(1,0,0,1,578.5,4)"></rect><text x="10" y="18.5" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" id="a4t" class="flowchartt" font-size="15px" transform="matrix(1,0,0,1,578.5,4)" stroke-width="1"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">/etc/sysconfig/i18n</tspan></text><path fill="none" stroke="#000000" d="M122.5,22.5C122.5,22.5,171.27841103076935,22.5,183.99700062570628,22.5" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj2)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#000000" d="M316,22.5C316,22.5,355.65409994125366,22.5,367.00043908460066,22.5" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj2)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#000000" d="M520,22.5C520,22.5,563.5480848550797,22.5,575.4982917342568,22.5" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj2)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path></svg></div><div class="md-section-divider"></div><div class="flow-diagram theme theme-white" title="点击查看大图" data-anchor-id="9avt"><svg height="43" version="1.1" width="839" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;" viewBox="0 0 839 43" preserveAspectRatio="xMidYMid meet"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.2</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block-obj3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><marker id="raphael-marker-endblock33-obj4" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block-obj3" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker></defs><rect x="0" y="0" width="87" height="37" r="20" rx="20" ry="20" fill="#ffffff" stroke="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" stroke-width="2" class="flowchart" id="b1" transform="matrix(1,0,0,1,34.5,4)"></rect><text x="10" y="18.5" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" id="b1t" class="flowchartt" font-size="15px" transform="matrix(1,0,0,1,34.5,4)" stroke-width="1"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">/etc/profile</tspan></text><rect x="0" y="0" width="148" height="37" r="0" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" stroke-width="2" class="flowchart" id="b2" transform="matrix(1,0,0,1,175.5,4)"></rect><text x="10" y="18.5" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" id="b2t" class="flowchartt" font-size="15px" transform="matrix(1,0,0,1,175.5,4)" stroke-width="1"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">/home/.bash_profile</tspan></text><rect x="0" y="0" width="114" height="37" r="0" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" stroke-width="2" class="flowchart" id="b3" transform="matrix(1,0,0,1,394.5,4)"></rect><text x="10" y="18.5" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" id="b3t" class="flowchartt" font-size="15px" transform="matrix(1,0,0,1,394.5,4)" stroke-width="1"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">/home/.bashrc</tspan></text><rect x="0" y="0" width="93" height="37" r="0" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" stroke-width="2" class="flowchart" id="b4" transform="matrix(1,0,0,1,590,4)"></rect><text x="10" y="18.5" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" id="b4t" class="flowchartt" font-size="15px" transform="matrix(1,0,0,1,590,4)" stroke-width="1"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">/etc/bashrc</tspan></text><rect x="0" y="0" width="52" height="37" r="20" rx="20" ry="20" fill="#ffffff" stroke="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" stroke-width="2" class="flowchart" id="b5" transform="matrix(1,0,0,1,785,4)"></rect><text x="10" y="18.5" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" id="b5t" class="flowchartt" font-size="15px" transform="matrix(1,0,0,1,785,4)" stroke-width="1"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">bash</tspan></text><path fill="none" stroke="#000000" d="M121.5,22.5C121.5,22.5,161.15409994125366,22.5,172.50043908460066,22.5" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj4)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#000000" d="M323.5,22.5C323.5,22.5,377.98078060150146,22.5,391.4945679772645,22.5" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj4)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#000000" d="M508.5,22.5C508.5,22.5,572.2990322113037,22.5,587.0027154162526,22.5" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj4)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#000000" d="M683,22.5C683,22.5,765.1544857025146,22.5,782.0025735907257,22.5" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj4)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path></svg></div><p data-anchor-id="qujv"><br>
+2) 非常规登录</p><blockquote data-anchor-id="9mrs" class="white-blockquote">
+  <p>如在系统内通过su命令登录超级用户</p>
+</blockquote><div class="md-section-divider"></div><div class="flow-diagram theme theme-white" title="点击查看大图" data-anchor-id="76gj"><svg height="43" version="1.1" width="724.5" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;" viewBox="0 0 724.5 43" preserveAspectRatio="xMidYMid meet"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.2</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block-obj5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><marker id="raphael-marker-endblock33-obj6" markerHeight="3" markerWidth="3" orient="auto" refX="1.5" refY="1.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block-obj5" transform="rotate(180 1.5 1.5) scale(0.6,0.6)" stroke-width="1.6667" fill="black" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker></defs><rect x="0" y="0" width="93" height="37" r="20" rx="20" ry="20" fill="#ffffff" stroke="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" stroke-width="2" class="flowchart" id="c1" transform="matrix(1,0,0,1,32.5,4)"></rect><text x="10" y="18.5" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" id="c1t" class="flowchartt" font-size="15px" transform="matrix(1,0,0,1,32.5,4)" stroke-width="1"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">/etc/bashrc</tspan></text><rect x="0" y="0" width="129" height="37" r="0" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" stroke-width="2" class="flowchart" id="c2" transform="matrix(1,0,0,1,190,4)"></rect><text x="10" y="18.5" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" id="c2t" class="flowchartt" font-size="15px" transform="matrix(1,0,0,1,190,4)" stroke-width="1"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">/etc/profile.d/*.sh</tspan></text><rect x="0" y="0" width="150" height="37" r="0" rx="0" ry="0" fill="#ffffff" stroke="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" stroke-width="2" class="flowchart" id="c3" transform="matrix(1,0,0,1,373,4)"></rect><text x="10" y="18.5" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" id="c3t" class="flowchartt" font-size="15px" transform="matrix(1,0,0,1,373,4)" stroke-width="1"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">/etc/profile.d/lang.sh</tspan></text><rect x="0" y="0" width="141" height="37" r="20" rx="20" ry="20" fill="#ffffff" stroke="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" stroke-width="2" class="flowchart" id="c4" transform="matrix(1,0,0,1,581.5,4)"></rect><text x="10" y="18.5" text-anchor="start" font="10px &quot;Arial&quot;" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: start; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;" id="c4t" class="flowchartt" font-size="15px" transform="matrix(1,0,0,1,581.5,4)" stroke-width="1"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">/etc/sysconfig/i18n</tspan></text><path fill="none" stroke="#000000" d="M125.5,22.5C125.5,22.5,174.27841103076935,22.5,186.99700062570628,22.5" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj6)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#000000" d="M319,22.5C319,22.5,358.65409994125366,22.5,370.00043908460066,22.5" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj6)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#000000" d="M523,22.5C523,22.5,566.5480848550797,22.5,578.4982917342568,22.5" stroke-width="2" marker-end="url(#raphael-marker-endblock33-obj6)" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path></svg></div><p data-anchor-id="ml2j"><br></p><div class="md-section-divider"></div><h3 data-anchor-id="nc18" id="3-注销配置文件">3. 注销配置文件</h3><blockquote data-anchor-id="4xg6" class="white-blockquote">
+  <p>～/.bash_logout <br>
+  注销时会执行该文件中的内容。</p>
+</blockquote><div class="md-section-divider"></div><h3 data-anchor-id="spto" id="4-历史命令配置文件">4. 历史命令配置文件</h3><blockquote data-anchor-id="8wu8" class="white-blockquote">
+  <p>～/.bash_history <br>
+  只有在退出登录时，本次登录过程所操作的命令才会写入该文件。 <br>
+  不过可以使用 <code>history -w</code> 命令强制写入当前操作过的命令。</p>
+</blockquote><div class="md-section-divider"></div><h3 data-anchor-id="j1mw" id="5-欢迎信息配置文件">5. 欢迎信息配置文件</h3><blockquote data-anchor-id="65qa" class="white-blockquote">
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本地欢迎信息： /etc/issue <br>
+  远程登录欢迎信息： /etc/issue.net <br>
+  &nbsp;&nbsp;&nbsp;登录后欢迎信息：   /etc/motd</p>
+</blockquote><hr><div class="md-section-divider"></div><h2 data-anchor-id="3udt" id="0x04-字符串处理">0x04. 字符串处理</h2><div class="md-section-divider"></div><h3 data-anchor-id="64fx" id="1基础正则">1.基础正则</h3><table data-anchor-id="6ewh" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th style="text-align:center;">元字符</th>
+ <th style="text-align:left;">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td style="text-align:center;">*</td>
+ <td style="text-align:left;">前一个字符匹配0次或任意次</td>
+</tr>
+<tr>
+ <td style="text-align:center;">.</td>
+ <td style="text-align:left;">匹配除了换行符外的任意一个字符</td>
+</tr>
+<tr>
+ <td style="text-align:center;">^</td>
+ <td style="text-align:left;">匹配行首</td>
+</tr>
+<tr>
+ <td style="text-align:center;"><span>$</span></td>
+ <td style="text-align:left;">匹配行尾，"^<span>$</span>"会匹配空白行</td>
+</tr>
+<tr>
+ <td style="text-align:center;">[]</td>
+ <td style="text-align:left;">指定字符集，匹配其中的任意一个字符</td>
+</tr>
+<tr>
+ <td style="text-align:center;">[^]</td>
+ <td style="text-align:left;">制定字符集，匹配括号中的字符以外的任意一个字符</td>
+</tr>
+<tr>
+ <td style="text-align:center;">\</td>
+ <td style="text-align:left;">转义，取消特殊符号的含义</td>
+</tr>
+<tr>
+ <td style="text-align:center;">\{n\}</td>
+ <td style="text-align:left;">匹配前面的字符恰好出现n次</td>
+</tr>
+<tr>
+ <td style="text-align:center;">\{n, \}</td>
+ <td style="text-align:left;">匹配前面的字符出现不小于n次</td>
+</tr>
+<tr>
+ <td style="text-align:center;">\{n,m\}</td>
+ <td style="text-align:left;">匹配前面的字符出现最少n次，最多m次</td>
+</tr>
+</tbody></table><p data-anchor-id="cl9f"><font color="red">注：正则属于包含匹配，只要一行中含有匹配目标，就会将整行列出。</font> <br>
+<font color="red">注：<code>()</code> 和<code>？</code>都属于扩展正则，不属于基础正则。</font></p><div class="md-section-divider"></div><h3 data-anchor-id="jlfn" id="2-字符串截取命令">2. 字符串截取命令</h3><p data-anchor-id="ftvy">1) cut （可用于管道符）</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="6reo"><ol class="linenums"><li class="L0"><code class="language-bash"><span class="com"># 以冒号分隔，截取第2，第3列的内容</span></code></li><li class="L1"><code class="language-bash"><span class="pln">cut </span><span class="pun">-</span><span class="pln">f </span><span class="lit">2</span><span class="pun">,</span><span class="lit">3</span><span class="pln"> </span><span class="pun">-</span><span class="pln">d </span><span class="str">":"</span><span class="pln"> </span><span class="pun">/</span><span class="pln">etc</span><span class="pun">/</span><span class="pln">passwd</span></code></li></ol></pre><pre data-anchor-id="nvrr"><code>-d 指定分隔符，默认以\t为分隔符
+-f 制定返回的列，返回多列以逗号分隔
+</code></pre><p data-anchor-id="cpvm">cut命令相对弱智，不能处理空格分隔的数据内容。</p><p data-anchor-id="0bx2">2）printf （可用于管道符） <br>
+类似于C语言中的格式化输出函数printf()。</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="pu53"><ol class="linenums"><li class="L0"><code class="language-bash"><span class="com"># 将cat执行的结果用printf命令显示出来</span></code></li><li class="L1"><code class="language-bash"><span class="pln">printf </span><span class="str">'%s\n'</span><span class="pln"> $</span><span class="pun">(</span><span class="pln">cat </span><span class="pun">/</span><span class="pln">etc</span><span class="pun">/</span><span class="pln">passwd</span><span class="pun">)</span></code></li></ol></pre><pre data-anchor-id="05r8"><code>%s - 显示字符串
+%i - 显示整数值
+%m.nf - 显示m位数字，其中有n个小数位
+</code></pre><p data-anchor-id="mlyk">3) awk （可用于管道符） <br>
+awk是一个十分复杂，但也十分强悍的命令。其基本用法如下：</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="nun0"><ol class="linenums"><li class="L0"><code class="language-bash"><span class="pln">awk </span><span class="str">'条件1{操作1}条件2{操作2}...'</span><span class="pln"> filename</span></code></li><li class="L1"><code class="language-bash"></code></li><li class="L2"><code class="language-bash"><span class="com"># 搭配 print 或 printf 过滤数据 </span></code></li><li class="L3"><code class="language-bash"></code></li><li class="L4"><code class="language-bash"><span class="com"># 单独列出 df 后的第1列和第3列内容，并用\t和\n格式化的结果</span></code></li><li class="L5"><code class="language-bash"><span class="pln">df </span><span class="pun">-</span><span class="pln">h </span><span class="pun">|</span><span class="pln"> awk </span><span class="str">'{print $1 "\t" $3 "\n"}'</span><span class="pln"> </span></code></li><li class="L6"><code class="language-bash"></code></li><li class="L7"><code class="language-bash"><span class="com"># 打印出磁盘占用量超过50%的分区名称</span></code></li><li class="L8"><code class="language-bash"><span class="pln">df </span><span class="pun">-</span><span class="pln">h </span><span class="pun">|</span><span class="pln"> grep </span><span class="pun">-</span><span class="pln">v </span><span class="str">"Filesystem"</span><span class="pln"> </span><span class="pun">|</span><span class="pln"> awk </span><span class="str">'$5&gt;=50{printf $1}'</span><span class="pln"> </span></code></li></ol></pre><ul data-anchor-id="ecwz">
+<li>BEGIN条件 用于在所有数据处理之前，先执行BEGIN后的操作</li>
+</ul><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="j16i"><ol class="linenums"><li class="L0"><code><span class="pln">awk </span><span class="str">'BEGIN{print "start process"}{其他操作}'</span><span class="pln"> filename</span></code></li></ol></pre><ul data-anchor-id="621y">
+<li>FS=""操作 用于指定分隔符</li>
+</ul><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="5oxy"><ol class="linenums"><li class="L0"><code><span class="pln">awk </span><span class="str">'BEGIN{FS=":"}{printf $1 "\n"}'</span><span class="pln"> </span><span class="pun">/</span><span class="pln">etc</span><span class="pun">/</span><span class="pln">passwd</span></code></li></ol></pre><p data-anchor-id="6lcv">4） sed（可用于管道符） <br>
+sed [选项] '[操作]' filename</p><ul data-anchor-id="xwu3">
+<li>选项 <br>
+<ul><li>-n 默认把所有数据输出到屏幕，处理过的数据行显示两遍，<font color="red">加了该选项后只输出处理过的数据行 </font></li>
+<li>-e 输入多条操作（编辑）命令</li>
+<li>-i 默认只输出，但不修改源文件内容，<font color="red">加了该项后会修改源文件内容</font></li></ul></li>
+<li>操作 <br>
+<ul><li>a 在指定行前追加一行</li>
+<li>i 在制定行后插入一行</li>
+<li>p 打印指定内容</li>
+<li>d 删除行</li>
+<li>c 整行替换</li>
+<li>s 替换字符串</li></ul></li>
+</ul><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="5ff3"><ol class="linenums"><li class="L0"><code class="language-bash"><span class="pln">sed </span><span class="pun">-</span><span class="pln">n </span><span class="str">'2p'</span><span class="pln"> </span><span class="pun">/</span><span class="pln">etc</span><span class="pun">/</span><span class="pln">passwd        </span><span class="com"># 只打印显示第2行</span></code></li><li class="L1"><code class="language-bash"><span class="pln">sed </span><span class="str">'2,4d'</span><span class="pln"> </span><span class="pun">/</span><span class="pln">etc</span><span class="pun">/</span><span class="pln">passwd         </span><span class="com"># 删除2-4行 </span></code></li><li class="L2"><code class="language-bash"><span class="pln">sed </span><span class="str">'2a haha'</span><span class="pln"> </span><span class="pun">/</span><span class="pln">etc</span><span class="pun">/</span><span class="pln">passwd      </span><span class="com"># 第2行前插入haha</span></code></li><li class="L3"><code class="language-bash"><span class="pln">sed </span><span class="str">'2i haha'</span><span class="pln"> </span><span class="pun">/</span><span class="pln">etc</span><span class="pun">/</span><span class="pln">passwd      </span><span class="com"># 第2行后插入haha</span></code></li><li class="L4"><code class="language-bash"><span class="pln">sed </span><span class="str">'3c yeah'</span><span class="pln"> </span><span class="pun">/</span><span class="pln">etc</span><span class="pun">/</span><span class="pln">passwd      </span><span class="com"># 第3行替换成yeah</span></code></li><li class="L5"><code class="language-bash"><span class="pln">sed </span><span class="pun">-</span><span class="pln">e </span><span class="str">'s/old/new/g;s/good//g'</span><span class="pln"> </span><span class="com"># 全文的old替换成new，删掉good</span></code></li><li class="L6"><code class="language-bash"><span class="com"># g 表示全部替换，不加只替换第一个</span></code></li></ol></pre><div class="md-section-divider"></div><h3 data-anchor-id="8tes" id="3-简单字符处理">3. 简单字符处理</h3><p data-anchor-id="h765">1) sort （可用于管道符） <br>
+sort [选项] filename</p><ul data-anchor-id="w2ib">
+<li>参数： <br>
+<ul><li>-r 逆序</li>
+<li>-n 以数字排序</li>
+<li>-t "x" 以x分隔</li>
+<li>-k m, [n] 以第m到n个字段进行排序</li></ul></li>
+</ul><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="etom"><ol class="linenums"><li class="L0"><code><span class="com"># 以：分隔后，并以第三列的数字为基础来 倒序排序</span></code></li><li class="L1"><code><span class="pln">sort </span><span class="pun">-</span><span class="pln">rnk </span><span class="str">"3,3"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">t </span><span class="str">":"</span><span class="pln"> </span><span class="pun">/</span><span class="pln">etc</span><span class="pun">/</span><span class="pln">passwd </span></code></li></ol></pre><p data-anchor-id="31z6">2) wc （可用于管道符） <br>
+统计行数、单词数、字符数。</p><pre data-anchor-id="hkqo"><code>-l 只统计行数
+-w 只统计单词数
+-m 只统计字符数
+</code></pre><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="yn7j"><ol class="linenums"><li class="L0"><code class="language-bash"><span class="com"># 如下两条命令结果一样</span></code></li><li class="L1"><code class="language-bash"><span class="pln">wc </span><span class="pun">/</span><span class="pln">etc</span><span class="pun">/</span><span class="pln">passwd</span></code></li><li class="L2"><code class="language-bash"><span class="pln">wc </span><span class="pun">-</span><span class="pln">lwm </span><span class="pun">/</span><span class="pln">etc</span><span class="pun">/</span><span class="pln">passwd</span></code></li><li class="L3"><code class="language-bash"><span class="pln">wc </span><span class="pun">-</span><span class="pln">ml </span><span class="pun">/</span><span class="pln">etc</span><span class="pun">/</span><span class="pln">passwd </span></code></li><li class="L4"><code class="language-bash"><span class="com">####**** 即便参数顺序颠倒，仍按照 行数、单词数、字符数 来显示 ****####</span></code></li></ol></pre><div class="md-section-divider"></div><hr><div class="md-section-divider"></div><h2 data-anchor-id="7uae" id="0x05-流程控制">0x05. 流程控制</h2><div class="md-section-divider"></div><h3 data-anchor-id="pd77" id="1-test测试">1. test测试( [ ] )</h3><p data-anchor-id="fbc2">一般不用test，而用其简写形式<code>[]</code>。</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="t34b"><ol class="linenums"><li class="L0"><code class="language-bash"><span class="com"># 判断 /root 是否存在，存在输出true，不存在输出false</span></code></li><li class="L1"><code class="language-bash"><span class="pln">test </span><span class="pun">-</span><span class="pln">e </span><span class="pun">/</span><span class="pln">root </span><span class="pun">&amp;&amp;</span><span class="pln"> echo true </span><span class="pun">||</span><span class="pln"> echo false</span></code></li><li class="L2"><code class="language-bash"></code></li><li class="L3"><code class="language-bash"><span class="com"># 等效写法（十分推荐）</span></code></li><li class="L4"><code class="language-bash"><span class="pun">[</span><span class="pln"> </span><span class="pun">-</span><span class="pln">e </span><span class="pun">/</span><span class="pln">root </span><span class="pun">]</span><span class="pln"> </span><span class="pun">&amp;&amp;</span><span class="pln"> echo true </span><span class="pun">||</span><span class="pln"> echo false</span></code></li></ol></pre><p data-anchor-id="vkii"><strong>1) 文件类型判断</strong></p><table data-anchor-id="ands" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th style="text-align:center;">选项</th>
+ <th style="text-align:left;">结果为真</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td style="text-align:center;">-d</td>
+ <td style="text-align:left;">存在，并且是目录文件</td>
+</tr>
+<tr>
+ <td style="text-align:center;">-e</td>
+ <td style="text-align:left;">存在</td>
+</tr>
+<tr>
+ <td style="text-align:center;">-f</td>
+ <td style="text-align:left;">存在，并且是普通文件</td>
+</tr>
+<tr>
+ <td style="text-align:center;">-b</td>
+ <td style="text-align:left;">存在，并且是块设备文件</td>
+</tr>
+<tr>
+ <td style="text-align:center;">-c</td>
+ <td style="text-align:left;">存在，并且是字符设备文件</td>
+</tr>
+<tr>
+ <td style="text-align:center;">-L</td>
+ <td style="text-align:left;">存在，并且是软链接（符号链接）文件</td>
+</tr>
+<tr>
+ <td style="text-align:center;">-p</td>
+ <td style="text-align:left;">存在，并且是管道文件</td>
+</tr>
+<tr>
+ <td style="text-align:center;">-s</td>
+ <td style="text-align:left;">存在，并且是非空文件</td>
+</tr>
+<tr>
+ <td style="text-align:center;">-S</td>
+ <td style="text-align:left;">存在，并且是套接字文件</td>
+</tr>
+</tbody></table><p data-anchor-id="yljs"><strong>2) 文件权限判断</strong></p><table data-anchor-id="co52" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th style="text-align:center;">选项</th>
+ <th style="text-align:left;">结果为真</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td style="text-align:center;">-r</td>
+ <td style="text-align:left;">存在，并且拥有读权限</td>
+</tr>
+<tr>
+ <td style="text-align:center;">-w</td>
+ <td style="text-align:left;">存在，并且拥有写权限</td>
+</tr>
+<tr>
+ <td style="text-align:center;">-x</td>
+ <td style="text-align:left;">存在，并且拥有执行权限</td>
+</tr>
+<tr>
+ <td style="text-align:center;">-u</td>
+ <td style="text-align:left;">存在，并且拥有SUID权限</td>
+</tr>
+<tr>
+ <td style="text-align:center;">-g</td>
+ <td style="text-align:left;">存在，并且拥有SGID权限</td>
+</tr>
+<tr>
+ <td style="text-align:center;">-k</td>
+ <td style="text-align:left;">存在，并且 拥有SBit权限</td>
+</tr>
+</tbody></table><p data-anchor-id="dleb">只要存在相应权限，就会判断为真，不管这个权限是谁的。</p><p data-anchor-id="cicv"><strong>3) 两个文件比较</strong></p><table data-anchor-id="w2vi" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th style="text-align:center;">选项</th>
+ <th style="text-align:left;">结果为真</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td style="text-align:center;">文件1 -nt 文件2</td>
+ <td style="text-align:left;">文件1 比 文件2 的修改时间新</td>
+</tr>
+<tr>
+ <td style="text-align:center;">文件1 -ot 文件2</td>
+ <td style="text-align:left;">文件1 比 文件2 的修改时间旧</td>
+</tr>
+<tr>
+ <td style="text-align:center;">文件1 -ef 文件2</td>
+ <td style="text-align:left;">文件1 和 文件2 的Inode一致（硬链接）</td>
+</tr>
+</tbody></table><p data-anchor-id="47lh"><strong>4) 两个整数比较</strong></p><table data-anchor-id="ubyd" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th style="text-align:center;">选项</th>
+ <th style="text-align:left;">结果为真</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td style="text-align:center;">nd1 -eq nd2</td>
+ <td style="text-align:left;">nd1 等于 nd2</td>
+</tr>
+<tr>
+ <td style="text-align:center;">nd1 -ne nd2</td>
+ <td style="text-align:left;">nd1 不等于 nd2</td>
+</tr>
+<tr>
+ <td style="text-align:center;">nd1 -gt nd2</td>
+ <td style="text-align:left;">nd1 大于 nd2</td>
+</tr>
+<tr>
+ <td style="text-align:center;">nd1 -lt nd2</td>
+ <td style="text-align:left;">nd1 小于 nd2</td>
+</tr>
+<tr>
+ <td style="text-align:center;">nd1 -ge nd2</td>
+ <td style="text-align:left;">nd1 大于等于 nd2</td>
+</tr>
+<tr>
+ <td style="text-align:center;">nd1 -le nd2</td>
+ <td style="text-align:left;">nd1 小于等于 nd2</td>
+</tr>
+</tbody></table><p data-anchor-id="ij00"><strong>5) 字符串判断</strong></p><table data-anchor-id="kjvr" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th style="text-align:center;">选项</th>
+ <th style="text-align:left;">结果为真</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td style="text-align:center;">-z string</td>
+ <td style="text-align:left;">string 为空</td>
+</tr>
+<tr>
+ <td style="text-align:center;">-n string</td>
+ <td style="text-align:left;">string 非空</td>
+</tr>
+<tr>
+ <td style="text-align:center;">s1 == s2</td>
+ <td style="text-align:left;">s1 等于 s2</td>
+</tr>
+<tr>
+ <td style="text-align:center;">s1 != s2</td>
+ <td style="text-align:left;">s1 不等于 s2</td>
+</tr>
+</tbody></table><p data-anchor-id="3qaz"><strong>6) 逻辑运算</strong></p><table data-anchor-id="vihk" class="table table-striped-white table-bordered">
+<thead>
+<tr>
+ <th style="text-align:center;">选项</th>
+ <th style="text-align:center;">作用</th>
+</tr>
+</thead>
+<tbody><tr>
+ <td style="text-align:center;">判断1 -a 判断2</td>
+ <td style="text-align:center;">与</td>
+</tr>
+<tr>
+ <td style="text-align:center;">判断1 -o 判断2</td>
+ <td style="text-align:center;">或</td>
+</tr>
+<tr>
+ <td style="text-align:center;">! 判断</td>
+ <td style="text-align:center;">非</td>
+</tr>
+</tbody></table><div class="md-section-divider"></div><h3 data-anchor-id="62fd" id="2-if-语句">2. if 语句</h3><p data-anchor-id="5pz6">基本语法</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="psbg"><ol class="linenums"><li class="L0"><code class="language-bash"><span class="kwd">if</span><span class="pln"> </span><span class="pun">[</span><span class="pln"> condition </span><span class="pun">];</span><span class="kwd">then</span></code></li><li class="L1"><code class="language-bash"><span class="pln">    process</span></code></li><li class="L2"><code class="language-bash"><span class="kwd">fi</span></code></li><li class="L3"><code class="language-bash"></code></li><li class="L4"><code class="language-bash"><span class="com"># 或者</span></code></li><li class="L5"><code class="language-bash"></code></li><li class="L6"><code class="language-bash"><span class="kwd">if</span><span class="pln"> </span><span class="pun">[</span><span class="pln"> condition </span><span class="pun">]</span></code></li><li class="L7"><code class="language-bash"><span class="pln">    </span><span class="kwd">then</span></code></li><li class="L8"><code class="language-bash"><span class="pln">    process</span></code></li><li class="L9"><code class="language-bash"><span class="kwd">fi</span></code></li><li class="L0"><code class="language-bash"></code></li><li class="L1"><code class="language-bash"><span class="com"># 带else的if语句</span></code></li><li class="L2"><code class="language-bash"><span class="kwd">if</span><span class="pln"> </span><span class="pun">[</span><span class="pln"> condition </span><span class="pun">]</span></code></li><li class="L3"><code class="language-bash"><span class="pln">    </span><span class="kwd">then</span></code></li><li class="L4"><code class="language-bash"><span class="pln">        process1</span></code></li><li class="L5"><code class="language-bash"><span class="pln">    </span><span class="kwd">else</span></code></li><li class="L6"><code class="language-bash"><span class="pln">        process2</span></code></li><li class="L7"><code class="language-bash"><span class="kwd">fi</span></code></li><li class="L8"><code class="language-bash"></code></li><li class="L9"><code class="language-bash"><span class="com"># if - elif - else</span></code></li><li class="L0"><code class="language-bash"><span class="kwd">if</span><span class="pln"> </span><span class="pun">[</span><span class="pln"> condition1 </span><span class="pun">]</span></code></li><li class="L1"><code class="language-bash"><span class="pln">    </span><span class="kwd">then</span></code></li><li class="L2"><code class="language-bash"><span class="pln">        process1</span></code></li><li class="L3"><code class="language-bash"><span class="kwd">elif</span><span class="pln"> </span><span class="pun">[</span><span class="pln"> condition2 </span><span class="pun">]</span></code></li><li class="L4"><code class="language-bash"><span class="pln">    </span><span class="kwd">then</span></code></li><li class="L5"><code class="language-bash"><span class="pln">        process2</span></code></li><li class="L6"><code class="language-bash"><span class="pln">   </span><span class="pun">...</span></code></li><li class="L7"><code class="language-bash"><span class="kwd">else</span></code></li><li class="L8"><code class="language-bash"><span class="pln">    process</span><span class="pun">-</span><span class="kwd">else</span></code></li><li class="L9"><code class="language-bash"><span class="kwd">fi</span></code></li></ol></pre><p data-anchor-id="vnx5">如下是一个判断APACHE服务是否正常工作的脚本</p><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="43fp"><ol class="linenums"><li class="L0"><code><span class="com">#!/bin/bash</span></code></li><li class="L1"><code></code></li><li class="L2"><code><span class="pln">test</span><span class="pun">=</span><span class="pln">$</span><span class="pun">(</span><span class="pln">ps </span><span class="pun">-</span><span class="pln">aux </span><span class="pun">|</span><span class="pln"> grep </span><span class="pun">-</span><span class="pln">v grep </span><span class="pun">|</span><span class="pln"> grep httpd</span><span class="pun">)</span></code></li><li class="L3"><code></code></li><li class="L4"><code><span class="kwd">if</span><span class="pln"> </span><span class="pun">[</span><span class="pln"> </span><span class="pun">-</span><span class="pln">n </span><span class="str">"$test"</span><span class="pln"> </span><span class="pun">]</span></code></li><li class="L5"><code><span class="pln">    </span><span class="kwd">then</span></code></li><li class="L6"><code><span class="pln">        echo </span><span class="str">"$(date) httpd is running..."</span><span class="pln"> </span><span class="pun">&gt;&gt;</span><span class="pln"> </span><span class="str">/tmp/</span><span class="pln">httpd</span><span class="pun">-</span><span class="pln">acc</span><span class="pun">.</span><span class="pln">log</span></code></li><li class="L7"><code><span class="pln">    </span><span class="kwd">else</span></code></li><li class="L8"><code><span class="pln">        </span><span class="str">/etc/</span><span class="pln">rc</span><span class="pun">.</span><span class="pln">d</span><span class="pun">/</span><span class="pln">init</span><span class="pun">.</span><span class="pln">d</span><span class="pun">/</span><span class="pln">httpd start </span><span class="pun">&amp;&gt;</span><span class="str">/dev/</span><span class="kwd">null</span></code></li><li class="L9"><code><span class="pln">        echo </span><span class="str">"$(date) httpd has restart !"</span><span class="pln"> </span><span class="pun">&gt;&gt;</span><span class="str">/tmp/</span><span class="pln">httpd</span><span class="pun">-</span><span class="pln">err</span><span class="pun">.</span><span class="pln">log</span></code></li><li class="L0"><code><span class="kwd">fi</span></code></li></ol></pre><div class="md-section-divider"></div><h3 data-anchor-id="kzin" id="3-case语句">3. case语句</h3><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="i3jl"><ol class="linenums"><li class="L0"><code class="language-bash"><span class="kwd">case</span><span class="pln"> $var </span><span class="kwd">in</span><span class="pln"> </span></code></li><li class="L1"><code class="language-bash"><span class="pln">    </span><span class="str">"var1"</span><span class="pun">)</span></code></li><li class="L2"><code class="language-bash"><span class="pln">        process1</span></code></li><li class="L3"><code class="language-bash"><span class="pln">        </span><span class="pun">;;</span></code></li><li class="L4"><code class="language-bash"><span class="pln">    </span><span class="str">"var2"</span><span class="pun">)</span></code></li><li class="L5"><code class="language-bash"><span class="pln">        process2</span></code></li><li class="L6"><code class="language-bash"><span class="pln">        </span><span class="pun">;;</span></code></li><li class="L7"><code class="language-bash"><span class="pln">    </span><span class="pun">......</span></code></li><li class="L8"><code class="language-bash"><span class="pln">    </span><span class="pun">*)</span></code></li><li class="L9"><code class="language-bash"><span class="pln">        final process</span></code></li><li class="L0"><code class="language-bash"><span class="pln">    </span><span class="pun">;;</span></code></li><li class="L1"><code class="language-bash"><span class="kwd">esac</span></code></li></ol></pre><p data-anchor-id="4qik">变量$var匹配下面的var1...到varN，匹配到就执行里面的内容。若都没有匹配到，就执行<code>*)</code>中的内容。</p><div class="md-section-divider"></div><h3 data-anchor-id="aicd" id="4-for遍历">4. for遍历</h3><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="6qwv"><ol class="linenums"><li class="L0"><code class="language-bash"><span class="kwd">for</span><span class="pln"> i </span><span class="kwd">in</span><span class="pln"> varlist</span></code></li><li class="L1"><code class="language-bash"><span class="pln">    </span><span class="kwd">do</span></code></li><li class="L2"><code class="language-bash"><span class="pln">        process</span></code></li><li class="L3"><code class="language-bash"><span class="pln">    </span><span class="kwd">done</span></code></li><li class="L4"><code class="language-bash"></code></li><li class="L5"><code class="language-bash"><span class="com"># 如下是一个实例</span></code></li><li class="L6"><code class="language-bash"><span class="kwd">for</span><span class="pln"> i </span><span class="kwd">in</span><span class="pln"> </span><span class="lit">1</span><span class="pln"> </span><span class="lit">2</span><span class="pln"> </span><span class="lit">3</span><span class="pln"> </span><span class="lit">4</span><span class="pln"> </span><span class="lit">5</span></code></li><li class="L7"><code class="language-bash"><span class="pln">    </span><span class="kwd">do</span></code></li><li class="L8"><code class="language-bash"><span class="pln">        echo $i</span></code></li><li class="L9"><code class="language-bash"><span class="pln">    </span><span class="kwd">done</span></code></li><li class="L0"><code class="language-bash"><span class="com"># 依次输出1 2 3 4 5</span></code></li><li class="L1"><code class="language-bash"></code></li><li class="L2"><code class="language-bash"><span class="com"># 除了遍历之外，for也支持c语言一样的循环</span></code></li><li class="L3"><code class="language-bash"><span class="kwd">for</span><span class="pln"> </span><span class="pun">((</span><span class="pln">i</span><span class="pun">=</span><span class="lit">1</span><span class="pun">;</span><span class="pln">i</span><span class="pun">&lt;=</span><span class="lit">100</span><span class="pun">;</span><span class="pln">i</span><span class="pun">=</span><span class="pln">i</span><span class="pun">+</span><span class="lit">1</span><span class="pun">))</span></code></li><li class="L4"><code class="language-bash"><span class="pln">    </span><span class="kwd">do</span></code></li><li class="L5"><code class="language-bash"><span class="pln">        process</span></code></li><li class="L6"><code class="language-bash"><span class="pln">    </span><span class="kwd">done</span></code></li><li class="L7"><code class="language-bash"></code></li><li class="L8"><code class="language-bash"><span class="com"># 批量创建用户</span></code></li><li class="L9"><code class="language-bash"><span class="kwd">for</span><span class="pln"> i </span><span class="kwd">in</span><span class="pln"> $usernames</span></code></li><li class="L0"><code class="language-bash"><span class="kwd">do</span></code></li><li class="L1"><code class="language-bash"><span class="pln">    </span><span class="pun">/</span><span class="pln">usr</span><span class="pun">/</span><span class="pln">sbin</span><span class="pun">/</span><span class="pln">useradd $i </span><span class="pun">&amp;&gt;/</span><span class="pln">dev</span><span class="pun">/</span><span class="pln">null</span></code></li><li class="L2"><code class="language-bash"><span class="pln">    echo $password </span><span class="pun">|</span><span class="pln"> </span><span class="pun">/</span><span class="pln">usr</span><span class="pun">/</span><span class="pln">bin</span><span class="pun">/</span><span class="pln">passwd </span><span class="pun">--</span><span class="pln">stdin $i </span><span class="pun">&amp;&gt;/</span><span class="pln">dev</span><span class="pun">/</span><span class="pln">null</span></code></li><li class="L3"><code class="language-bash"><span class="kwd">done</span></code></li><li class="L4"><code class="language-bash"></code></li><li class="L5"><code class="language-bash"><span class="com"># 批量删除普通 用户</span></code></li><li class="L6"><code class="language-bash"><span class="kwd">for</span><span class="pln"> i </span><span class="kwd">in</span><span class="pln"> $</span><span class="pun">(</span><span class="pln">cat </span><span class="pun">/</span><span class="pln">etc</span><span class="pun">/</span><span class="pln">passwd </span><span class="pun">|</span><span class="pln"> grep </span><span class="pun">-</span><span class="pln">v root </span><span class="pun">|</span><span class="pln"> grep </span><span class="pun">/</span><span class="pln">bin</span><span class="pun">/</span><span class="pln">bash </span><span class="pun">|</span><span class="pln"> cut </span><span class="pun">-</span><span class="pln">d </span><span class="str">":"</span><span class="pln"> </span><span class="pun">-</span><span class="pln">f </span><span class="lit">1</span><span class="pun">)</span></code></li><li class="L7"><code class="language-bash"><span class="kwd">do</span></code></li><li class="L8"><code class="language-bash"><span class="pln">    userdel </span><span class="pun">-</span><span class="pln">r $i</span></code></li><li class="L9"><code class="language-bash"><span class="kwd">done</span></code></li></ol></pre><div class="md-section-divider"></div><h3 data-anchor-id="gbgu" id="5-while循环和until循环">5. while循环和until循环</h3><div class="md-section-divider"></div><pre class="prettyprint linenums prettyprinted" data-anchor-id="ha4m"><ol class="linenums"><li class="L0"><code><span class="com"># while</span></code></li><li class="L1"><code><span class="com"># 执行循环，直到condition判断为假</span></code></li><li class="L2"><code><span class="kwd">while</span><span class="pln"> </span><span class="pun">[</span><span class="pln"> condition </span><span class="pun">]</span></code></li><li class="L3"><code><span class="kwd">do</span></code></li><li class="L4"><code><span class="pln">    process</span></code></li><li class="L5"><code><span class="kwd">done</span></code></li><li class="L6"><code></code></li><li class="L7"><code><span class="com"># until</span></code></li><li class="L8"><code><span class="com"># 执行循环，直到condition判断为真</span></code></li><li class="L9"><code><span class="kwd">until</span><span class="pln"> </span><span class="pun">[</span><span class="pln"> condition </span><span class="pun">]</span></code></li><li class="L0"><code><span class="kwd">do</span></code></li><li class="L1"><code><span class="pln">    process</span></code></li><li class="L2"><code><span class="kwd">done</span></code></li></ol></pre><p data-anchor-id="owcb">while 和 until 的执行循环的判别条件刚好相反，until用起来十分的别扭。</p><hr><div class="md-section-divider"></div><h2 data-anchor-id="detg" id="0x-系统权限">0x. 系统权限</h2><hr><p data-anchor-id="la0u"><br><br><br><br><br><br><br></p></div>
+</body>
+</html>

@@ -1,0 +1,427 @@
+
+
+*{
+    margin:0; padding:0;
+}
+
+body{
+    /*font:15px "microsoft yahei",serif; /* 英文字体多，适合用 Georgia 字体 */
+    background:#222;
+    font-weight:400;
+    color:#fff;
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased; /* 因为不是所有浏览器都支持，所以需要加浏览器内核 -webkit- */
+    -moz-font-smoothing:antialiased;
+    /* 
+        font-smoothing : subpixel-antialiased | none | antialiased ;
+        是css3里设置字体的抗锯齿光滑度的属性 可以让文字看起来更光滑
+        none用于小像素的文本、subpixel-antialiased浏览器默认的、antialiased反锯齿。
+    */
+}
+
+a{
+    text-decoration:none;
+    color:#fff;
+}
+
+.clr{
+    width:0;
+    height:0;
+    overflow:hidden;
+    clear:both;
+}
+
+.s-window{
+    width:100%;
+    height:100%;
+    position:relative;
+    left:0;
+    top:0;
+    overflow: hidden;
+    /*font-family:"Josefin Slab", "Myriad Pro", Arial, sans-serif;*/
+}
+
+.s-window > input{
+    width:10%;
+    height:40px;
+    line-height:40px;
+    position:fixed;
+    bottom:0;
+    cursor:pointer;
+    /*
+        设置鼠标指针指上来之后的指针形状，pointer为手型。
+     */
+}
+
+.s-window > input{
+    /*
+        隐藏一个元素的4中方法
+        display:none;   元素隐藏却不占位 
+        position:absolute; left:-99999px;  元素隐藏却不占位
+        对此案例，以上两种方式不适用
+        visibility:hidden;  元粗隐藏，但是占位
+        opacity:0; 元素存在，透明度变成0
+    */
+   z-index: 999;
+   /* 
+        因为需要 先选中input才能触发a，所以input的优先级应该高于a 
+        html中，后面的标签的优先级高于前面的标签
+   */
+}
+
+
+
+/* 
+    + 相邻兄弟选择器， + a 表示选择后面相邻的一个标签a
+    ~ 相邻兄弟选择器， ~ a 表示选择后面相邻的所有标签a
+*/
+#st-control-1{
+    left:0%;
+}
+#st-control-2{
+    left:10%;
+}
+
+
+
+
+
+.s-scroll{
+    -webkit-backface-visibility:hidden;
+    -moz-backface-visibility:hidden;
+    -o-backface-visibility:hidden;
+    -ms-backface-visibility:hidden;
+    backface-visibility:hidden;
+    /*
+        backface-visibility : visible | hidden ;
+        定义元素不面向屏幕时是否可见。
+        取值 visible 背面是可见的， hidden 背面是不可见的。
+     */
+}
+/* 内容区域的css */
+.s-scroll,
+.s-panel{
+    width:100%;
+    height:100%;
+    position:relative;
+}
+
+.s-scroll{
+    left:0;
+    top:0;
+    -webkit-transform:translate3d(0,0,0);
+    -moz-transform:translate3d(0,0,0);
+    -o-transform:translate3d(0,0,0);
+    -ms-transform:translate3d(0,0,0);
+    transform:translate3d(0,0,0);
+    /*
+        transform 为 css3属性，用于元素旋转，倾斜等转换。
+     */
+    
+    -webkit-transition:all 0.6s ease-in-out;
+    -moz-transition:all 0.6s ease-in-out;
+    -o-transition:all 0.6s ease-in-out;
+    -ms-transition:all 0.6s ease-in-out;
+    transition:all 0.6s ease-in-out;
+    /*
+        transition 改变谁就定义在谁的上面。
+        用于实现页面过渡的动画效果。
+        第一个值表示 对那个属性进行过渡，all表示对所有属性过渡。
+        第二个值表示 动画过渡所用时间，过渡的时间为0.6s。
+        第三个值表示 过渡效果，ease-in-out表示由慢开始，变快，最后变慢。
+     */
+}
+
+.s-panel{
+    background:#222;
+    overflow:hidden;
+}
+
+/*#st-control-1:checked ~ .s-scroll{
+    -webkit-transform:translateY(0%);
+    -moz-transform:translateY(0%);
+    -o-transform:translateY(0%);
+    -ms-transform:translateY(0%);
+    transform:translateY(0%);
+}
+#st-control-2:checked ~ .s-scroll{
+    -webkit-transform:translateY(-100%);
+    -moz-transform:translateY(-100%);
+    -o-transform:translateY(-100%);
+    -ms-transform:translateY(-100%);
+    transform:translateY(-100%);
+}*/
+/*#st-control-3:checked ~ .s-scroll{
+    -webkit-transform:translateY(-200%);
+    -moz-transform:translateY(-200%);
+    -o-transform:translateY(-200%);
+    -ms-transform:translateY(-200%);
+    transform:translateY(-200%);
+}
+#st-control-4:checked ~ .s-scroll{
+    -webkit-transform:translateY(-300%);
+    -moz-transform:translateY(-300%);
+    -o-transform:translateY(-300%);
+    -ms-transform:translateY(-300%);
+    transform:translateY(-300%);
+}
+#st-control-5:checked ~ .s-scroll{
+    -webkit-transform:translateY(-400%);
+    -moz-transform:translateY(-400%);
+    -o-transform:translateY(-400%);
+    -ms-transform:translateY(-400%);
+    transform:translateY(-400%);
+}
+
+.st-desc{
+    width:300px;
+    height:300px;
+    background:#fff;
+    position:absolute;
+    left:50%;
+    top:0;
+    margin-left:-150px;
+    -webkit-transform:translateY(-50%) rotate(45deg);
+    -moz-transform:translateY(-50%) rotate(45deg);
+    -o-transform:translateY(-50%) rotate(45deg);
+    -ms-transform:translateY(-50%) rotate(45deg);
+    transform:translateY(-50%) rotate(45deg);
+    /*
+        或者使用如下方式也可以
+        transform:rotate(45deg);
+        margin-top:-150px;
+    */
+}
+
+/* [] 属性选择器 
+[data-icon]:after{
+    content:attr(data-icon);
+    width:300px;
+    height:300px;
+    color:#222;
+    font-size:150px;
+    text-align:center;
+    line-height:300px;
+    position:absolute;
+    left:50%;
+    top:50%;
+    margin:-85px 0 0 -85px;
+    -webkit-transform:rotate(-45deg); 
+    -moz-transform:rotate(-45deg); 
+    -o-transform:rotate(-45deg); 
+    -ms-transform:rotate(-45deg); 
+    transform:rotate(-45deg);
+    font-family:"raphaelicons";
+}
+*/
+
+
+/*.s-panel h2{
+    color:#39c;
+    font-size:54px;
+    line-height:54px;
+    font-weight:900;
+    text-align:center;
+    width:80%;
+    position:absolute;
+    left:10%;
+    top:50%;
+    margin-top:-40px;
+}*/
+
+#st-control-1:checked ~ .s-scroll #s-panel-1 h2,
+#st-control-2:checked ~ .s-scroll #s-panel-2 h2,
+#st-control-3:checked ~ .s-scroll #s-panel-3 h2,
+#st-control-4:checked ~ .s-scroll #s-panel-4 h2,
+#st-control-5:checked ~ .s-scroll #s-panel-5 h2{
+    -webkit-animation:moveDown 0.6s ease-in-out 0.2s backwards;
+    -moz-animation:moveDown 0.6s ease-in-out 0.2s backwards;
+    -ms-animation:moveDown 0.6s ease-in-out 0.2s backwards;
+    -o-animation:moveDown 0.6s ease-in-out 0.2s backwards;
+    animation:moveDown 0.6s ease-in-out 0.2s backwards;
+}
+/* 
+    css3 提供了两个动画方法，animation 和 transition
+    animation 的动画 不需要事件来触发
+    transition 的动画需 要事件来触发
+*/
+/*
+    下面是动画定义部分
+    动画名称为 moveDown， 动画内容为动画帧的定义
+    0%表示动画起始位置，最开始的第一帧
+    100%表示动画结束的位置，最后一帧
+    期间的动画效果完全自动实现
+ */
+@-webkit-keyframes moveDown{
+    0%{
+        -webkit-transform:translateY(-40px);
+        opacity:0;
+    }
+    100%{
+        -webkit-transform:translateY(0);
+        opacity:1;
+    }
+}
+@-moz-keyframes moveDown{
+    0%{
+        -moz-transform:translateY(-40px);
+        opacity:0;
+    }
+    100%{
+        -moz-transform:translateY(0);
+        opacity:1;
+    }
+}
+@-o-keyframes moveDown{
+    0%{
+        -o-transform:translateY(-40px);
+        opacity:0;
+    }
+    100%{
+        -o-transform:translateY(0);
+        opacity:1;
+    }
+}
+@-ms-keyframes moveDown{
+    0%{
+        -ms-transform:translateY(-40px);
+        opacity:0;
+    }
+    100%{
+        -ms-transform:translateY(0);
+        opacity:1;
+    }
+}
+@keyframes moveDown{
+    0%{
+        transform:translateY(-40px);
+        opacity:0;
+    }
+    100%{
+        transform:translateY(0);
+        opacity:1;
+    }
+}
+
+.s-panel p{
+    position:absolute;
+    width:60%;
+    left:20%;
+    top:53%;
+    font-size:22px;
+    line-height:22px;
+    text-align:center;
+    /*color:#888;*/
+    color:#fff;
+}
+
+#st-control-1:checked ~ .s-scroll #s-panel-1 p,
+#st-control-2:checked ~ .s-scroll #s-panel-2 p{
+    -webkit-animation:moveUp 0.6s ease-in-out 0.2s backwards;
+    -moz-animation:moveUp 0.6s ease-in-out 0.2s backwards;
+    -ms-animation:moveUp 0.6s ease-in-out 0.2s backwards;
+    -o-animation:moveUp 0.6s ease-in-out 0.2s backwards;
+    animation:moveUp 0.6s ease-in-out 0.2s backwards;
+}
+/*
+    下面是动画定义部分
+    动画名称为 moveUp， 动画内容为动画帧的定义
+    0%表示动画起始位置，最开始的第一帧
+    100%表示动画结束的位置，最后一帧
+    期间的动画效果完全自动实现
+ */
+@-webkit-keyframes moveUp{
+    0%{
+        -webkit-transform:translateY(40px);
+        opacity:0;
+    }
+    100%{
+        -webkit-transform:translateY(0);
+        opacity:1;
+    }
+}
+@-moz-keyframes moveUp{
+    0%{
+        -moz-transform:translateY(40px);
+        opacity:0;
+    }
+    100%{
+        -moz-transform:translateY(0);
+        opacity:1;
+    }
+}
+@-o-keyframes moveUp{
+    0%{
+        -o-transform:translateY(40px);
+        opacity:0;
+    }
+    100%{
+        -o-transform:translateY(0);
+        opacity:1;
+    }
+}
+@-ms-keyframes moveUp{
+    0%{
+        -ms-transform:translateY(40px);
+        opacity:0;
+    }
+    100%{
+        -ms-transform:translateY(0);
+        opacity:1;
+    }
+}
+@keyframes moveUp{
+    0%{
+        transform:translateY(40px);
+        opacity:0;
+    }
+    100%{
+        transform:translateY(0);
+        opacity:1;
+    }
+}
+
+/* 最后的细节处理 */
+.st-color{
+    background:#fff;
+}
+.st-color .st-desc
+{
+    background:#222;
+}
+.st-color [data-icon]:after{
+    color:#fff;
+}
+.st-color p{
+    color:#222;
+}
+
+/*
+    响应式布局
+    and ( min-width: xxx px ) and ( max-width:xxx px ) 指定屏幕大小
+ 
+@media screen and (max-width:520px){
+    .s-panel h2{
+        font-size:36px;
+    }
+    .s-panel p{
+        width:100%;
+        left:0;
+        margin-top:0px;
+        font-size:13px;
+    }
+    .s-window > a{
+        font-size:12px;
+    }
+    .st-desc{
+        width:120px;
+        height:120px;
+        margin-left:-60px;
+    }
+    [data-icon]:after{
+        font-size:60px;
+        top:25%;
+        left:25%;
+    }
+}
+*/

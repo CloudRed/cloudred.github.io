@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>CloudRed | Blog</title>
+
+    <link href="static/images/icon.png" rel="shortcut icon"/>
+    
+
+    <link href="static/css/base.lib.min.css" rel="stylesheet" media="screen">
+    <link href="static/css/layout.min.css" rel="stylesheet" media="screen">
+
+    <!-- <link id="prettify-style" href="static/css/desert-cmd.css" type="text/css" rel="stylesheet"> -->
+
+    <link id="prettify-style" href="static/css/prettify-cmd.css" type="text/css" rel="stylesheet">
+
+    <link href="static/css/base.css" type="text/css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="static/plugs/mCustomScrollbar/jquery.mCustomScrollbar.min.css">
+
+</head>
+
+<body>
+    
+    <!-- HEADER -->
+    <div class="header">
+        <h1><a href="https://cloudred.github.io">我的首页啊</a></h1>
+    </div> 
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+        <div class="scroll">
+
+            <div id="wrap">
+                <div class="">
+                    <!-- <h2><a href="javascript:;" onclick="showPage('{{path}}');return false;">{{title}}</a>&nbsp;&nbsp;{{date}}</h2> -->
+                    <h2>404!</h2>
+                    <!-- Disqus 获取评论数 -->
+                    <!-- <p><span class='disqus-comment-count' data-disqus-url="https://cloudred.github.io{{path}}#disqus_thread">0 Comments</span></p> -->
+                </div>
+            </div>
+
+            <div id="page">
+                <div class="page-inner">
+                    <div class="page-close">
+                        <a class="mybtn animate" href="javascript:;" >BACK</a>
+                    </div>
+                    <div id="page-context"></div>
+                    <div class="toc-btn">
+                        <a id="show-toc-btn" class="mybtn toc-close animate" href="javascript:;"><i class="icon-list"></i></a>
+                    </div>
+                    <div class="animate toc-bar">
+                        <div class="toc-title">
+                            Content
+                        </div>
+                        <div id="toc-content" class="toc-content" data-display='0'>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                     
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <a id="more" href="javascript:;">more</a>
+        <hr />
+        <a href="#">&copy; CloudRed</a>
+    </div>     
+
+    <!--Google CDN jQuery with fallback to local -->
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="static/js/jquery-1.11.0.min.js"><\/script>')</script> -->
+    
+    <script type="text/javascript" src="static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="static/js/GeneralTools.js"></script>
+    <!-- <script type="text/javascript" src="pages/data.js"></script> -->
+    <script type="text/javascript" src="static/js/Generator.js"></script>
+
+    <script src="static/plugs/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+    
+    <script src="static/plugs/mCustomScrollbar/jquery.mousewheel.min.js"></script>
+    <script>
+        // Seting Scrollbar object
+        (function($){
+           $(window).load(function(){   
+                $("body").mCustomScrollbar({
+                    // axis : 'xy',
+                    // theme : 'minimal-dark',
+                    theme : 'dark',
+                    autoHideScrollbar : true,
+                    scrollInertia: 100,
+                });
+                $("#page").mCustomScrollbar({
+                    theme : 'dark',
+                    // autoHideScrollbar : true,
+                    // scrollInertia: 100,
+                });
+            });
+        })(jQuery);
+    </script>
+
+<!--     <script>
+        // Load DISQUS object
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+
+            s.src = '//cloudred.disqus.com/embed.js';
+
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+            })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript> -->
+
+</body>
+</html>
