@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>CloudRed | Blog</title>
 
     <link href="static/images/icon.png" rel="shortcut icon"/>
@@ -17,90 +18,102 @@
     <link href="static/css/base.css" type="text/css" rel="stylesheet" />
 
     <link rel="stylesheet" href="static/plugs/mCustomScrollbar/jquery.mCustomScrollbar.min.css">
-
+    <link rel="stylesheet" href="newindex.css" />
+    <link rel="stylesheet" href="color.css" />
 </head>
 
 <body onresize="sizechange()">
     
-    <!-- HEADER -->
-    <div class="main">
+<!-- nav begin -->
+<!-- <div class=""> -->
+    <div class="s-window">
+        <!-- <input type="radio" name="radio-set" id="st-control-1" /> -->
+        <!-- <input type="radio" name="radio-set" id="st-control-2" /> -->
+        <!-- nav end -->
+        <!-- content begin -->
+        <div class="s-scroll">
 
-<!-- FOOTER -->
-        <div class="main-footer">
-            <a href="#">&copy; CloudRed</a>
-        </div> 
-        <div class="main-scroll">
-            <div class="bg"></div>
-            <div class="main-barrie">
-                <div class="main-wrap">
-                    <div class="wrap-top">
-                        <a href="https://cloudred.github.io">
-                            <img src='static/images/icon-source.png'/ width="140" height="140">
-                        </a>
-                        <h1>HELLO! I AM CLOUDRED</h1>
+            <section class="s-panel main" id="s-panel-1">
+                <!-- FOOTER -->
+                <div class="main-footer">
+                    <a href="#">&copy; CloudRed</a>
+                </div>
+
+                <!-- content -->
+                <div class="m-scroll">
+                    <!-- <div class="bg"></div> -->
+
+                    <div class="main-barrie">
+                        <div class="main-wrap">
+                            <div class="wrap-top">
+                                <a href="https://cloudred.github.io">
+                                    <img src='static/images/icon-source.png'/ width="140" height="140">
+                                </a>
+                                <h1>HELLO! I AM CLOUDRED</h1>
+                            </div>
+                            <div class="wrap-bottom">
+                                <i class="split"></i>
+
+                                <ul>
+                                    <li><a id="ac" href="javascript:;"><i class="icon-file-text" title="My essay"></i></a></li>
+                                    <li><a href="mailto:withoutrule14@gmail.com"><i class="icon-envelope-alt" title="Contact Me"></i></a></li>
+                                    <li><a href="https://github.com/CloudRed"><i class="icon-github" title="My Github"></i></a></li>
+                                    <li><a id="me" href="javascript:;"><i class="icon-user" title="About Me"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="wrap-bottom">
-                        <i class="split"></i>
+                             
+                </div>
+            </section>
 
-                        <ul>
-                            <li><a href="javascript:;"><i class="icon-file-text"></i></a></li>
-                            <li><a href="mailto:withoutrule14@gmail.com"><i class="icon-envelope-alt"></i></a></li>
-                            <li><a href="https://github.com/CloudRed"><i class="icon-github"></i></a></li>
-                            <li><a href="javascript:;"><i class="icon-user"></i></a></li>
-                        </ul>
+            <section class="s-panel st-color" id="s-panel-2">
+                <a class="back-main" href="javascript:;">BACK</a>
+                <p>This is my smooth transition test page 2 !</p>
+                <div id="wrap">
+                    <div class="">
+                        <h2><a href="javascript:;" onclick="showPage('{{path}}');return false;">{{title}}</a>&nbsp;&nbsp;{{date}}</h2>
+                        <!-- Disqus 获取评论数 -->
+                        <!-- <p><span class='disqus-comment-count' data-disqus-url="https://cloudred.github.io{{path}}#disqus_thread">0 Comments</span></p> -->
                     </div>
                 </div>
-            </div>
-                     
+            </section>
+
+            <section class="s-panel st-color" id="s-panel-right">
+                <a class="back-main" href="javascript:;">BACK</a>
+                <p>This is my smooth transition test page right !</p>
+            </section>
+
         </div>
-
-         
     </div>
+<!-- </div> -->
 
-   
+<script type="text/javascript" src="static/js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="static/js/GeneralTools.js"></script>
+<script type="text/javascript" src="pages/data.js"></script>
+<script type="text/javascript" src="static/js/Generator.js"></script>
 
-    <!--Google CDN jQuery with fallback to local -->
-    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="static/js/jquery-1.11.0.min.js"><\/script>')</script> -->
-    
-    <script type="text/javascript" src="static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="static/js/GeneralTools.js"></script>
-    <!-- <script type="text/javascript" src="pages/data.js"></script> -->
-    <script type="text/javascript" src="static/js/Generator.js"></script>
+<script src="static/plugs/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
 
-    <script src="static/plugs/mCustomScrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
-    
-    <script src="static/plugs/mCustomScrollbar/jquery.mousewheel.min.js"></script>
-    <script>
-        // Seting Scrollbar object
-        (function($){
-           $(window).load(function(){   
-                $(".main").mCustomScrollbar({
-                    // axis : 'xy',
-                    theme : 'minimal',
-                    // theme : 'dark',
-                    autoHideScrollbar : true,
-                    scrollInertia: 0,
-                });
+<script src="static/plugs/mCustomScrollbar/jquery.mousewheel.min.js"></script>
+<script>
+    // Seting Scrollbar object
+    (function($){
+       $(window).load(function(){   
+            $(".main").mCustomScrollbar({
+                // axis : 'xy',
+                theme : 'minimal',
+                // theme : 'dark',
+                autoHideScrollbar : true,
+                scrollInertia: 0,
             });
-        })(jQuery);
-        $(".main-scroll").css({'height':$('body').height()})
-        function sizechange(){
-            $(".main-scroll").css({'height':$('body').height()})
-        }
-    </script>
+        });
+    })(jQuery);
+    $(".m-scroll").css({'height':$('body').height()})
+    function sizechange(){
+        $(".m-scroll").css({'height':$('body').height()})
+    }
+</script>
 
-<!--     <script>
-        // Load DISQUS object
-        (function() { // DON'T EDIT BELOW THIS LINE
-            var d = document, s = d.createElement('script');
-
-            s.src = '//cloudred.disqus.com/embed.js';
-
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-            })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript> -->
 </body>
 </html>
