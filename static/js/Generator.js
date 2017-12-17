@@ -1,45 +1,50 @@
 ;
 
-// var page_show = PAGE_SHOW;
-// var HOST_NAME = 'https://cloudred.github.io';
-// var disqus_root = DISQUS_ROOT;
+var page_show = PAGE_SHOW;
+var HOST_NAME = 'https://cloudred.github.io';
 
-// var data = PAGE_DATA;
-// var tags = [];
-// var item_count = 0;
-// var template = g('#wrap').innerHTML;
-// var DISQUSWIDGETS;
-// var disqus_domain;
-// var disqus_shortname;
+var data = PAGE_DATA;
+var tags = [];
+var item_count = 0;
+var template = g('#wrap').innerHTML;
 
-// ;
-// var html = [];
-// var show_length = page_show;
 
-// if( data.length < page_show ){
-//     show_length = data.length;
-// }
-// if( data.length - item_count < page_show ){
-//     show_length = data.length - item_count;
-// }
+;
+var html = [];
+var show_length = page_show;
 
-// for( i = 0; i < show_length; i++ ){
-//     var _html = template.replace( /{{title}}/g, data[i].title )
-//                             .replace( /{{path}}/g, data[i].path )
-//                             .replace( /{{date}}/g, data[i].date );
-//     html.push( _html );
-//     for( s in data[i].tags){
-//         var _tag = data[i].tags[s];
-//         tags.push( _tag );
-//     }
-// }
+if( data.length < page_show ){
+    show_length = data.length;
+}
+if( data.length - item_count < page_show ){
+    show_length = data.length - item_count;
+}
 
-// item_count = i;
-// g('#wrap').innerHTML = html.join(' ');
+for( i = 0; i < show_length; i++ ){
+    var _html = template.replace( /{{title}}/g, data[i].title )
+                            .replace( /{{date}}/g, data[i].date )
+                            .replace( /{{path}}/g, data[i].path )
+                            .replace( /{{brief}}/g, data[i].brief );
+    html.push( _html );
+    for( s in data[i].tags){
+        var _tag = data[i].tags[s];
+        tags.push( _tag );
+    }
+}
+
+item_count = i;
+g('#wrap').innerHTML = html.join(' ');
 
 /*////////////////////////////////////////////////////////////
+// DISQUS NOW CLOSED
+// IF NEED, OPEN I
 
+// ;var DISQUS_ROOT = 'http://cloudred.disqus.com';
 
+var disqus_root = DISQUS_ROOT;
+var DISQUSWIDGETS;
+var disqus_domain;
+var disqus_shortname;
 var DISQUSWIDGETS = function(){
     var f=document,
         a=disqus_root.match(/(https?:)?\/\/(?:www\.)?([\w_\-]+)\.((?:dev\.)?disqus\.(?:com|org)(?::\d+)?)/i),
@@ -198,7 +203,8 @@ $(function(){
         for( i = item_count; i < show_length + item_count; i++ ){
             var _html = template.replace( /{{title}}/g, data[i].title )
                                     .replace( /{{path}}/g, data[i].path )
-                                    .replace( /{{date}}/g, data[i].date );
+                                    .replace( /{{date}}/g, data[i].date )
+                                    .replace( /{{brief}}/g, data[i].brief );
             html.push( _html );
             for( s in data[i].tags){
                 var _tag = data[i].tags[s];
@@ -220,8 +226,17 @@ $(function(){
         $('body').mCustomScrollbar('scrollTo', 'top');
     });
 
+    // slide to the bottom section (essay section)
     $('#ac').click(function(){
         $('.s-scroll').css({'transform':'translateY(-100%)'});
+    });
+    // slide to the right section   
+    $('#me').click(function(){
+        $('.s-scroll').css({'transform':'translateX(-100%)'});
+    });
+    // when slide, back to the main
+    $('.back-main').click(function(){
+        $('.s-scroll').css({'transform':'translate(0,0)'});
     });
 
 });

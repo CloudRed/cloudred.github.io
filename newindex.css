@@ -1,14 +1,11 @@
 
-
 *{
     margin:0; padding:0;
 }
 
 body{
     /*font:15px "microsoft yahei",serif; /* 英文字体多，适合用 Georgia 字体 */
-    background:#222;
     font-weight:400;
-    color:#fff;
     overflow:hidden;
     -webkit-font-smoothing:antialiased; /* 因为不是所有浏览器都支持，所以需要加浏览器内核 -webkit- */
     -moz-font-smoothing:antialiased;
@@ -21,7 +18,6 @@ body{
 
 a{
     text-decoration:none;
-    color:#fff;
 }
 
 .clr{
@@ -133,45 +129,16 @@ a{
 }
 
 .s-panel{
-    background:#222;
+    /*background:#222;*/
     overflow:hidden;
 }
 
-/*#st-control-1:checked ~ .s-scroll{
-    -webkit-transform:translateY(0%);
-    -moz-transform:translateY(0%);
-    -o-transform:translateY(0%);
-    -ms-transform:translateY(0%);
-    transform:translateY(0%);
+#s-panel-right{
+    position:absolute;
+    top:0;
+    left:100%;
 }
-#st-control-2:checked ~ .s-scroll{
-    -webkit-transform:translateY(-100%);
-    -moz-transform:translateY(-100%);
-    -o-transform:translateY(-100%);
-    -ms-transform:translateY(-100%);
-    transform:translateY(-100%);
-}*/
-/*#st-control-3:checked ~ .s-scroll{
-    -webkit-transform:translateY(-200%);
-    -moz-transform:translateY(-200%);
-    -o-transform:translateY(-200%);
-    -ms-transform:translateY(-200%);
-    transform:translateY(-200%);
-}
-#st-control-4:checked ~ .s-scroll{
-    -webkit-transform:translateY(-300%);
-    -moz-transform:translateY(-300%);
-    -o-transform:translateY(-300%);
-    -ms-transform:translateY(-300%);
-    transform:translateY(-300%);
-}
-#st-control-5:checked ~ .s-scroll{
-    -webkit-transform:translateY(-400%);
-    -moz-transform:translateY(-400%);
-    -o-transform:translateY(-400%);
-    -ms-transform:translateY(-400%);
-    transform:translateY(-400%);
-}
+
 
 .st-desc{
     width:300px;
@@ -229,79 +196,6 @@ a{
     margin-top:-40px;
 }*/
 
-#st-control-1:checked ~ .s-scroll #s-panel-1 h2,
-#st-control-2:checked ~ .s-scroll #s-panel-2 h2,
-#st-control-3:checked ~ .s-scroll #s-panel-3 h2,
-#st-control-4:checked ~ .s-scroll #s-panel-4 h2,
-#st-control-5:checked ~ .s-scroll #s-panel-5 h2{
-    -webkit-animation:moveDown 0.6s ease-in-out 0.2s backwards;
-    -moz-animation:moveDown 0.6s ease-in-out 0.2s backwards;
-    -ms-animation:moveDown 0.6s ease-in-out 0.2s backwards;
-    -o-animation:moveDown 0.6s ease-in-out 0.2s backwards;
-    animation:moveDown 0.6s ease-in-out 0.2s backwards;
-}
-/* 
-    css3 提供了两个动画方法，animation 和 transition
-    animation 的动画 不需要事件来触发
-    transition 的动画需 要事件来触发
-*/
-/*
-    下面是动画定义部分
-    动画名称为 moveDown， 动画内容为动画帧的定义
-    0%表示动画起始位置，最开始的第一帧
-    100%表示动画结束的位置，最后一帧
-    期间的动画效果完全自动实现
- */
-@-webkit-keyframes moveDown{
-    0%{
-        -webkit-transform:translateY(-40px);
-        opacity:0;
-    }
-    100%{
-        -webkit-transform:translateY(0);
-        opacity:1;
-    }
-}
-@-moz-keyframes moveDown{
-    0%{
-        -moz-transform:translateY(-40px);
-        opacity:0;
-    }
-    100%{
-        -moz-transform:translateY(0);
-        opacity:1;
-    }
-}
-@-o-keyframes moveDown{
-    0%{
-        -o-transform:translateY(-40px);
-        opacity:0;
-    }
-    100%{
-        -o-transform:translateY(0);
-        opacity:1;
-    }
-}
-@-ms-keyframes moveDown{
-    0%{
-        -ms-transform:translateY(-40px);
-        opacity:0;
-    }
-    100%{
-        -ms-transform:translateY(0);
-        opacity:1;
-    }
-}
-@keyframes moveDown{
-    0%{
-        transform:translateY(-40px);
-        opacity:0;
-    }
-    100%{
-        transform:translateY(0);
-        opacity:1;
-    }
-}
 
 .s-panel p{
     position:absolute;
@@ -313,72 +207,6 @@ a{
     text-align:center;
     /*color:#888;*/
     color:#fff;
-}
-
-#st-control-1:checked ~ .s-scroll #s-panel-1 p,
-#st-control-2:checked ~ .s-scroll #s-panel-2 p{
-    -webkit-animation:moveUp 0.6s ease-in-out 0.2s backwards;
-    -moz-animation:moveUp 0.6s ease-in-out 0.2s backwards;
-    -ms-animation:moveUp 0.6s ease-in-out 0.2s backwards;
-    -o-animation:moveUp 0.6s ease-in-out 0.2s backwards;
-    animation:moveUp 0.6s ease-in-out 0.2s backwards;
-}
-/*
-    下面是动画定义部分
-    动画名称为 moveUp， 动画内容为动画帧的定义
-    0%表示动画起始位置，最开始的第一帧
-    100%表示动画结束的位置，最后一帧
-    期间的动画效果完全自动实现
- */
-@-webkit-keyframes moveUp{
-    0%{
-        -webkit-transform:translateY(40px);
-        opacity:0;
-    }
-    100%{
-        -webkit-transform:translateY(0);
-        opacity:1;
-    }
-}
-@-moz-keyframes moveUp{
-    0%{
-        -moz-transform:translateY(40px);
-        opacity:0;
-    }
-    100%{
-        -moz-transform:translateY(0);
-        opacity:1;
-    }
-}
-@-o-keyframes moveUp{
-    0%{
-        -o-transform:translateY(40px);
-        opacity:0;
-    }
-    100%{
-        -o-transform:translateY(0);
-        opacity:1;
-    }
-}
-@-ms-keyframes moveUp{
-    0%{
-        -ms-transform:translateY(40px);
-        opacity:0;
-    }
-    100%{
-        -ms-transform:translateY(0);
-        opacity:1;
-    }
-}
-@keyframes moveUp{
-    0%{
-        transform:translateY(40px);
-        opacity:0;
-    }
-    100%{
-        transform:translateY(0);
-        opacity:1;
-    }
 }
 
 /* 最后的细节处理 */
